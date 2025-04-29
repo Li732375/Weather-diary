@@ -3,7 +3,7 @@ name: Daily Weather Update
 on:
   schedule:
     - cron: '0 23 * * *'  # 台灣時間每天 07:00 執行（UTC+8 → 23:00 UTC）
-  workflow_dispatch:       # 手動執行選項
+  workflow_dispatch:       # 手動觸發
 
 jobs:
   build:
@@ -23,9 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install matplotlib requests
 
+      - name: Generate weather_diary.py from template
+        run: sed "s/YOUR_API_KEY/${{ secrets.WEATHER_API_KEY }}/" weather_diary.py.template > weather_diary.py
+
       - name: Run weather script
-        env:
-          API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: python weather_diary.py
 
       - name: Commit and push changes
