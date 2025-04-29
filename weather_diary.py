@@ -58,7 +58,8 @@ def get_trend_values(Loc_data, index, date):
         
     return Loc_data["LocationName"], Loc_Table_Names
 
-def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, temp_times, temp_values, index, date):
+def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, 
+               temp_times, temp_values, index, date):
     plt.rcParams['font.family'] = 'Microsoft JhengHei'
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(14, 6))
@@ -71,14 +72,17 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, temp_times
     weekday_map = ["一", "二", "三", "四", "五", "六", "日"]
     time_labels = [f"{dt.strftime('%H')}\n{weekday_map[dt.weekday()]}" for dt in temp_times]
 
-    ax.plot(range(len(temp_times)), temp_values, marker="o", linestyle="-", color="cyan", linewidth=2)
+    ax.plot(range(len(temp_times)), temp_values, marker="o", linestyle="-", 
+            color="cyan", linewidth=2)
 
     for x, y in zip(range(len(temp_times)), temp_values):
-        ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, color='white')
+        ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, 
+                color='white')
 
-    ax.set_title(f"{loc_name} 每小時 {WeatherElement_Name_zh} 變化預測", fontsize=16)
+    ax.set_title(f"{loc_name} 每小時 {WeatherElement_Name_zh} 變化預測", 
+                 fontsize=16)
 
-    # 設定 X 軸 tick：每兩個 + 開頭結尾（限到 index 38）
+    # 設定 X 軸 tick
     xtick_locs = list(range(0, len(temp_times), 2))
     if 0 not in xtick_locs:
         xtick_locs.insert(0, 0)
@@ -129,7 +133,7 @@ if __name__ == "__main__":
 
     args_list = [(loc, idx, date) for idx, loc in enumerate(loc_list)]
 
-    # 多進程
+    # 多進程(processes)
     '''
     # 可以自行調整 processes 數量
 
