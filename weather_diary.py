@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 project_link = "https://github.com/Li732375/weather_diary"
-#API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
+API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
 ElementName_list = ["溫度", "體感溫度", "相對濕度", "降雨機率"]
 
 # 獲取天氣資料
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     date = datetime.now().strftime("%Y-%m-%d")
 
     with open("weather.md", "w", encoding="utf-8-sig") as f:
-        f.write(f"\# {date} 高雄天氣預報\n\n")
+        f.write(f"# {date} 高雄天氣預報\n\n")
         f.write(f"一個託付的每日自動更新氣象資料的專案\n\n")
         f.write(f"|區里|預報圖|\n")
         f.write(f"|:-:|:-:|\n")
