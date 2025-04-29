@@ -2,6 +2,7 @@ import requests
 import json
 import matplotlib.pyplot as plt
 from datetime import datetime
+from multiprocessing import Pool
 
 project_link = "https://github.com/Li732375/weather_diary"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
@@ -21,7 +22,7 @@ def get_weather_data():
     return data
 
 # 繪製每小時單位變化的數據
-def get_trend_values(Loc_data, index):
+def get_trend_values(Loc_data, index, date):
     """
     :param data: 載入的 JSON 資料
     :param index: 輸出的圖片檔名序號
@@ -52,13 +53,14 @@ def get_trend_values(Loc_data, index):
                                     WeatherElement_Name, 
                                     temperature_times, 
                                     temperature_values, 
-                                    index)
+                                    index, 
+                                    date)
         Loc_Table_Names.append(table_address)
         
     return Loc_data["LocationName"], Loc_Table_Names
 
 # 繪製折線圖
-def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, temp_times, temp_values, index):
+def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, temp_times, temp_values, index, date):
     plt.rcParams['font.family'] = 'Microsoft JhengHei' # 設置中文字體
     plt.style.use('dark_background')  # 背景黑色
     fig, ax = plt.subplots(figsize=(14, 6))
@@ -85,6 +87,9 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, temp_times
 
     return save_link  # 回傳圖片路徑
 
+def worker(args):
+    loc, index, date = args
+    return get_trend_values(loc, index, date)
 
 if __name__ == "__main__":
     # 取得時間
@@ -98,11 +103,15 @@ if __name__ == "__main__":
 
     data = get_weather_data()
     loc_list = data["records"]["Locations"][0]["Location"]
-    for index, loc in enumerate(loc_list):
-        # 繪製每小時變化的折線圖並儲存成圖片
-        Location_Name, Table_links = get_trend_values(loc, index)
 
-        for links in Table_links:
+    args_list = [(loc, idx, date) for idx, loc in enumerate(loc_list)]
+
+    # 多進程
+    with Pool(processes=4) as pool:  # 可以自行調整 processes 數量，比如 4 或 6
+        results = pool.map(worker, args_list)
+
+    for Location_Name, Table_links in results:
+        for link in Table_links:
             with open("weather.md", "a", encoding="utf-8-sig") as f:
-                pic_link = project_link + "/" + links
-                f.write(f"|{Location_Name}|![該區每小時變化圖]({pic_link})|\n")
+                pic_link = project_link + "/" + link
+                f.write(f"|{Location_Name}|![該區裡每小時氣溫變化圖]({pic_link})|\n")
