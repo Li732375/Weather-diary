@@ -24,13 +24,12 @@ jobs:
           pip install matplotlib requests
 
       - name: Run weather script
-        working-directory: ${{ github.workspace }}
         env:
           API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: python weather_diary.py
+        working-directory: ${{ github.workspace }}
 
       - name: Commit and push changes
-        working-directory: ${{ github.workspace }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
