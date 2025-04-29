@@ -10,7 +10,8 @@ ElementName_list = ["溫度", "體感溫度", "相對濕度", "降雨機率"]
 
 # 獲取天氣資料
 def get_weather_data():
-    URL = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-065?Authorization={API_KEY}&ElementName={",".join(ElementName_list)}&format=JSON&sort=time"
+    element_names = ",".join(ElementName_list)
+    URL = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-065?Authorization={API_KEY}&ElementName={element_names}&format=JSON&sort=time"
 
     response = requests.get(URL)
     data = response.json()
