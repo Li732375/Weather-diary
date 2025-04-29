@@ -125,9 +125,10 @@ if __name__ == "__main__":
     date = datetime.now().strftime("%Y-%m-%d")
 
     with open("weather.md", "w", encoding="utf-8-sig") as f:
+        f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
+        f.write(f"連結 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
         f.write(f"# {date} 高雄天氣預報\n\n")
-        f.write(f"一個託付的每日自動更新氣象資料的專案\n\n")
-        f.write(f"|區里|預報圖|\n")
+        f.write(f"|區里|每小時預報圖|\n")
         f.write(f"|:-:|:-:|\n")
 
     data = get_weather_data()
