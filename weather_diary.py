@@ -58,6 +58,7 @@ def get_trend_values(Loc_data, index, date):
         
     return Loc_data["LocationName"], Loc_Table_Names
 
+# 繪製圖表
 def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, 
                temp_times, temp_values, index, date):
     plt.rcParams['font.family'] = 'Microsoft JhengHei'
@@ -114,6 +115,7 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
 
     return save_link
 
+# 多進程處理
 def worker(args):
     loc, index, date = args
     return get_trend_values(loc, index, date)
