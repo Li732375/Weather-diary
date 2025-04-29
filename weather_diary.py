@@ -2,7 +2,7 @@ import requests
 import json
 import matplotlib.pyplot as plt
 from datetime import datetime
-from multiprocessing import Pool
+from multiprocessing import Pool, cpu_count
 
 project_link = "https://github.com/Li732375/weather_diary"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
@@ -27,6 +27,7 @@ def get_trend_values(Loc_data, index, date):
     :param data: 載入的 JSON 資料
     :param index: 輸出的圖片檔名序號
     """
+    Loc_Table_Names = []
 
     for element in Loc_data["WeatherElement"]:
         WeatherElement_Name_zh = element["ElementName"]  # 氣象單位繁中名稱
@@ -34,58 +35,80 @@ def get_trend_values(Loc_data, index, date):
         # 單位的時段資料
         temperature_times = []
         temperature_values = []
-        # 同區域所有圖片檔名
-        Loc_Table_Names = []
 
         # 擷取各時段單位數據
         for time_info in element["Time"]:
             dt = datetime.fromisoformat(time_info["DataTime"])
-            time_label = dt.strftime("%m/%d %H")  # ex：04/28 12、04/28 13...
             WeatherElement_Name = list(time_info["ElementValue"][0].keys())[0]  # 取得氣象單位英文名稱
             WeatherElement_value = list(time_info["ElementValue"][0].values())[0]  # 取得氣象單位數值
             
-            temperature_times.append(time_label)
+            temperature_times.append(dt)
             temperature_values.append(int(WeatherElement_value))
 
         # 繪表
-        table_address = plot_table(Loc_data["LocationName"], 
-                                    WeatherElement_Name_zh, 
-                                    WeatherElement_Name, 
-                                    temperature_times, 
-                                    temperature_values, 
-                                    index, 
-                                    date)
+        table_address = plot_table(
+            Loc_data["LocationName"], 
+            WeatherElement_Name_zh, 
+            WeatherElement_Name, 
+            temperature_times, 
+            temperature_values, 
+            index, 
+            date)
         Loc_Table_Names.append(table_address)
         
     return Loc_data["LocationName"], Loc_Table_Names
 
-# 繪製折線圖
 def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, temp_times, temp_values, index, date):
-    plt.rcParams['font.family'] = 'Microsoft JhengHei' # 設置中文字體
-    plt.style.use('dark_background')  # 背景黑色
+    plt.rcParams['font.family'] = 'Microsoft JhengHei'
+    plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(14, 6))
 
-    ax.plot(temp_times, temp_values, marker="o", linestyle="-", color="cyan", linewidth=2)  # 線條亮色+粗一點
+    # 限制只顯示序位 0–38 共 39 筆
+    temp_times = temp_times[:39]
+    temp_values = temp_values[:39]
 
-    # 在每個點上標溫度數值
-    for x, y in zip(temp_times, temp_values):
-        ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=12, color='white')
+    # 轉換成 "12\n(三)" 格式
+    weekday_map = ["一", "二", "三", "四", "五", "六", "日"]
+    time_labels = [f"{dt.strftime('%H')}\n{weekday_map[dt.weekday()]}" for dt in temp_times]
 
-    # 設定標題和軸
-    ax.set_title(f"{loc_name} 每小時{WeatherElement_Name_zh}變化", fontsize=16)
-    ax.set_xlabel("時 (Hour)", fontsize=12)
-    ax.set_ylabel(f"{WeatherElement_Name_zh}", fontsize=12)
+    ax.plot(range(len(temp_times)), temp_values, marker="o", linestyle="-", color="cyan", linewidth=2)
 
-    ax.set_xticks(temp_times)  # 只顯示有資料的時刻
+    for x, y in zip(range(len(temp_times)), temp_values):
+        ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, color='white')
+
+    ax.set_title(f"{loc_name} 每小時 {WeatherElement_Name_zh} 變化預測", fontsize=16)
+
+    # 設定 X 軸 tick：每兩個 + 開頭結尾（限到 index 38）
+    xtick_locs = list(range(0, len(temp_times), 2))
+    if 0 not in xtick_locs:
+        xtick_locs.insert(0, 0)
+    if len(temp_times) - 2 not in xtick_locs:
+        xtick_locs.append(len(temp_times) - 2)
+    if len(temp_times) - 1 not in xtick_locs:
+        xtick_locs.append(len(temp_times) - 1)
+    xtick_locs = sorted(set(xtick_locs))
+
+    ax.set_xticks(xtick_locs)
+    ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
+
+    ax.set_xlim(-0.8, len(temp_times) - 0.2)
+
     ax.grid(True, linestyle='--', alpha=0.5)
 
-    # 儲存成圖片
+    # Y 軸設定，避免數值標籤超出
+    max_value = max(temp_values)
+    min_value = min(temp_values)
+    padding = max(1, int((max_value - min_value) * 0.2))
+    ax.set_ylim(min_value - padding * 0.8, max_value + padding)
+
+    plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
+
     plt.tight_layout()
     save_link = f"Tables/{date}_{WeatherElement_Name}_{index}.png"
     plt.savefig(save_link, dpi=300)
     plt.close()
 
-    return save_link  # 回傳圖片路徑
+    return save_link
 
 def worker(args):
     loc, index, date = args
@@ -107,11 +130,21 @@ if __name__ == "__main__":
     args_list = [(loc, idx, date) for idx, loc in enumerate(loc_list)]
 
     # 多進程
-    with Pool(processes=4) as pool:  # 可以自行調整 processes 數量，比如 4 或 6
+    '''
+    # 可以自行調整 processes 數量
+
+    實際建議上限：不超過 CPU 實體或邏輯核心數量。例如：4 核心 8 線程的 CPU：建議上限 ≈ 8。
+
+    若設太多（如 processes=1000），可能導致：
+    - 系統過載（CPU 使用率 100%）；
+    - 任務切換過於頻繁，反而變慢；
+    - 記憶體不足或進程排程失敗。
+    '''
+    with Pool(processes=cpu_count()) as pool:
         results = pool.map(worker, args_list)
 
     for Location_Name, Table_links in results:
         for link in Table_links:
             with open("weather.md", "a", encoding="utf-8-sig") as f:
                 pic_link = project_link + "/" + link
-                f.write(f"|{Location_Name}|![該區裡每小時氣溫變化圖]({pic_link})|\n")
+                f.write(f"|{Location_Name}|![該區每小時變化圖]({pic_link})|\n")
