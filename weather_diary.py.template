@@ -3,6 +3,10 @@ import json
 import matplotlib.pyplot as plt
 from datetime import datetime
 from multiprocessing import Pool, cpu_count
+import os
+
+# 確保 Tables 資料夾存在
+os.makedirs("Tables", exist_ok=True)
 
 project_link = "https://github.com/Li732375/weather_diary"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
