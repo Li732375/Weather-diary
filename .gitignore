@@ -1,6 +1,7 @@
 # 隱藏包含金鑰的主程式
 weather_diary.py
 test.py
+3day_weather_forecast_data_KS.json
 
 # Python cache
 __pycache__/
