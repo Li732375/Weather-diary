@@ -32,6 +32,10 @@ jobs:
           sudo mv noto/*.otf /usr/share/fonts/
           sudo fc-cache -fv
 
+      - name: Check installed fonts
+        run: |
+          find /usr/share/fonts -iname "*noto*"
+
       - name: Generate weather_diary.py from template
         run: sed "s/YOUR_API_KEY/${{ secrets.WEATHER_API_KEY }}/" weather_diary.py.template > weather_diary.py
 
