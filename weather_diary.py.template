@@ -1,6 +1,7 @@
 import requests
 import json
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 from datetime import datetime
 from multiprocessing import Pool, cpu_count
 import os
@@ -66,7 +67,11 @@ def get_trend_values(Loc_data, index, date):
 def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, 
                temp_times, temp_values, index, date):
     #plt.rcParams['font.family'] = 'Microsoft JhengHei'  # Windows 限定字型
-    plt.rcParams['font.family'] = 'Noto Sans CJK TC'  # Linux/GitHub Actions 限定字型
+
+    # Linux/GitHub Actions 限定
+    font_path = "/usr/share/fonts/NotoSansTC-Regular.otf"  # 請根據實際檔名確認這一行
+    prop = font_manager.FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = prop.get_name()
 
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(14, 6))
