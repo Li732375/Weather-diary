@@ -3,7 +3,7 @@ name: Daily Weather Update
 on:
   schedule:
     - cron: '0 23 * * *'  # 台灣時間每天 07:00 執行（UTC+8 → 23:00 UTC）
-  workflow_dispatch:       # 手動觸發
+  workflow_dispatch:
 
 jobs:
   build:
@@ -23,12 +23,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install matplotlib requests
 
-      - name: Install Noto Sans CJK TC font
+      - name: Install Noto Sans TC font manually
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk
-          fc-list :lang=zh  # Optional: 印出可用中文字型
-          fc-cache -f -v     # 重新建立字型快取
+          sudo apt-get install -y fontconfig wget
+          wget -q https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKtc-hinted.zip
+          unzip NotoSansCJKtc-hinted.zip -d noto
+          sudo mv noto/*.otf /usr/share/fonts/
+          sudo fc-cache -fv
 
       - name: Generate weather_diary.py from template
         run: sed "s/YOUR_API_KEY/${{ secrets.WEATHER_API_KEY }}/" weather_diary.py.template > weather_diary.py
