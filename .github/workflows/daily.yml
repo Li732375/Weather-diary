@@ -28,7 +28,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y fontconfig wget
           wget https://github.com/googlefonts/noto-cjk/raw/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Regular.otf
-        sudo mv NotoSansCJKtc-Regular.otf /usr/share/fonts/
+          sudo mv NotoSansCJKtc-Regular.otf /usr/share/fonts/
           sudo fc-cache -fv
           fc-list | grep "Noto Sans CJK TC"
 
