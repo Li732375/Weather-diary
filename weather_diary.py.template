@@ -8,7 +8,7 @@ import os
 # 確保 Tables 資料夾存在
 os.makedirs("Tables", exist_ok=True)
 
-project_link = "https://github.com/Li732375/weather_diary"
+project_link = "https://github.com/Li732375/weather_diary/blob/main"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
 ElementName_list = ["溫度", "體感溫度", "相對濕度", "降雨機率"]
 
