@@ -65,7 +65,9 @@ def get_trend_values(Loc_data, index, date):
 # 繪製圖表
 def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, 
                temp_times, temp_values, index, date):
-    plt.rcParams['font.family'] = 'Microsoft JhengHei'
+    #plt.rcParams['font.family'] = 'Microsoft JhengHei'  # Windows 限定字型
+    plt.rcParams['font.family'] = 'Noto Sans CJK TC'  # Linux/GitHub Actions 限定字型
+
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(14, 6))
 
