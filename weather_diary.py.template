@@ -18,7 +18,7 @@ setup_chinese_font()
 os.makedirs("Tables", exist_ok=True)
 
 API_KEY = "YOUR_API_KEY"
-ElementName_list = ["溫度", "體感溫度", "相對濕度", "降雨機率"]
+ElementName_list = ["溫度", "體感溫度", "相對濕度"]
 
 def get_weather_data():
     element_names = ",".join(ElementName_list)
