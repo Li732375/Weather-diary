@@ -23,6 +23,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install matplotlib requests
 
+      - name: Install Noto Sans CJK TC font
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+
       - name: Generate weather_diary.py from template
         run: sed "s/YOUR_API_KEY/${{ secrets.WEATHER_API_KEY }}/" weather_diary.py.template > weather_diary.py
 
