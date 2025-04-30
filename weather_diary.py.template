@@ -8,7 +8,6 @@ import os
 # 確保 Tables 資料夾存在
 os.makedirs("Tables", exist_ok=True)
 
-project_link = "https://github.com/Li732375/weather_diary/blob/main"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
 ElementName_list = ["溫度", "體感溫度", "相對濕度", "降雨機率"]
 
@@ -158,7 +157,7 @@ if __name__ == "__main__":
     for Location_Name, Table_links in results:
         for link in Table_links:
             with open(output_file, "a", encoding="utf-8-sig") as f:
-                pic_link = project_link + "/" + link
+                pic_link = "./" + link
                 f.write(f"|{Location_Name}|![該區每小時變化圖]({pic_link})|\n")
 
     with open(output_file, "a", encoding="utf-8-sig") as f:
