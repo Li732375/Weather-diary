@@ -128,10 +128,10 @@ def worker(args):
 if __name__ == "__main__":
     # 取得時間
     date = datetime.now().strftime("%Y-%m-%d")
+    output_file = "README.md"
 
-    with open("README.md", "w", encoding="utf-8-sig") as f:
+    with open(output_file, "w", encoding="utf-8-sig") as f:
         f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
-        f.write(f"連結 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
         f.write(f"# {date} 高雄天氣預報\n\n")
         f.write(f"|區里|每小時預報圖|\n")
         f.write(f"|:-:|:-:|\n")
@@ -157,6 +157,10 @@ if __name__ == "__main__":
 
     for Location_Name, Table_links in results:
         for link in Table_links:
-            with open("weather.md", "a", encoding="utf-8-sig") as f:
+            with open(output_file, "a", encoding="utf-8-sig") as f:
                 pic_link = project_link + "/" + link
                 f.write(f"|{Location_Name}|![該區每小時變化圖]({pic_link})|\n")
+
+    with open(output_file, "a", encoding="utf-8-sig") as f:
+        f.write("\n\n## 資料來源\n")
+        f.write("中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
