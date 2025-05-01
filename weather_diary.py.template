@@ -86,7 +86,7 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
         ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, 
                 color='white')
 
-    ax.set_title(f"{loc_name} 每小時 {WeatherElement_Name_zh} 變化預測", fontsize=16)
+    ax.set_title(f"{loc_name} 每小時 {WeatherElement_Name_zh} 變化預測", fontsize=20)
 
     # 設定 X 軸 tick：每三個 + 開頭結尾（限到 index 38）
     xtick_locs = list(range(0, len(temp_times), 3))
@@ -99,19 +99,17 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
     xtick_locs = sorted(set(xtick_locs))
 
     ax.set_xticks(xtick_locs)
-    ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
+    ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=16)
+    ax.set_xlim(-0.8, len(temp_times) - 0.2)  # 保留左右空間
 
-    # 保留左右空間
-    ax.set_xlim(-0.8, len(temp_times) - 0.2)
-
-    # 顯示網格
-    ax.grid(True, linestyle='--', alpha=0.5)
+    ax.grid(True, linestyle='--', alpha=0.5)  # 顯示網格
 
     # Y 軸設定，避免數值標籤超出
     max_value = max(temp_values)
     min_value = min(temp_values)
     padding = max(1, int((max_value - min_value) * 0.2))
     ax.set_ylim(min_value - padding * 0.8, max_value + padding)
+    ax.tick_params(axis='y', labelsize=14)
 
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
     plt.tight_layout()
@@ -164,4 +162,3 @@ if __name__ == "__main__":
     with open(output_file, "a", encoding="utf-8-sig") as f:
         f.write("\n\n## 資料來源\n")
         f.write("中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
-        
