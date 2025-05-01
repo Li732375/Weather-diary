@@ -154,11 +154,12 @@ if __name__ == "__main__":
 
     for District_Name, Table_links in results:
         with open(output_file, "a", encoding="utf-8-sig") as f:
-                f.write(f"{District_Name}：\n")
+            f.write(f"## {District_Name}：\n")
 
-        for link in Table_links:
-            with open(output_file, "a", encoding="utf-8-sig") as f:
+            for link in Table_links:
                 f.write(f"![該區今明每小時變化圖]({'./' + link})\n")
+            
+            f.write(f"\n")
 
     with open(output_file, "a", encoding="utf-8-sig") as f:
         f.write(f"\n\n資料來源\n")
