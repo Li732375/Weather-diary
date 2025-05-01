@@ -85,8 +85,9 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
     for x, y in zip(range(len(temp_times)), temp_values):
         ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, 
                 color='white')
-
-    ax.set_title(f"{loc_name} 每小時 {WeatherElement_Name_zh} 變化預測", fontsize=20)
+    
+    # 設定繪圖標題
+    ax.set_title(f"{loc_name} 今明每小時 {WeatherElement_Name_zh} 預測", fontsize=20)
 
     # 設定 X 軸 tick：每三個 + 開頭結尾（限到 index 38）
     xtick_locs = list(range(0, len(temp_times), 3))
