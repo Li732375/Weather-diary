@@ -154,12 +154,14 @@ if __name__ == "__main__":
     with Pool(processes=cpu_count()) as pool:
         results = pool.map(worker, args_list)
 
-    for Location_Name, Table_links in results:
+    for District_Name, Table_links in results:
+        with open(output_file, "a", encoding="utf-8-sig") as f:
+                f.write(f"{District_Name}：\n")
+
         for link in Table_links:
             with open(output_file, "a", encoding="utf-8-sig") as f:
-                pic_link = "./" + link
-                f.write(f"|{Location_Name}|![該區每小時變化圖]({pic_link})|\n")
+                f.write(f"![該區今明每小時變化圖]({"./" + link})\n")
 
     with open(output_file, "a", encoding="utf-8-sig") as f:
-        f.write("\n\n## 資料來源\n")
-        f.write("中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
+        f.write(f"\n\n資料來源\n")
+        f.write(f"中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
