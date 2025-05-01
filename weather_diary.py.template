@@ -6,7 +6,7 @@ from datetime import datetime
 from multiprocessing import Pool, cpu_count
 import os
 
-# 設定中文字型
+# 設定 Linux/GitHub Actions 中文字型
 def setup_chinese_font():
     font_path = "/usr/share/fonts/NotoSansCJKtc-Regular.otf"
     prop = font_manager.FontProperties(fname=font_path)
@@ -17,9 +17,10 @@ setup_chinese_font()
 # 確保 Tables 資料夾存在
 os.makedirs("Tables", exist_ok=True)
 
-API_KEY = "YOUR_API_KEY"
+API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
 ElementName_list = ["溫度", "體感溫度", "相對濕度"]
 
+# 獲取天氣資料
 def get_weather_data():
     element_names = ",".join(ElementName_list)
     URL = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-065?Authorization={API_KEY}&ElementName={element_names}&format=JSON&sort=time"
@@ -32,21 +33,25 @@ def get_weather_data():
 
     return data
 
+# 繪製每小時單位變化的數據
 def get_trend_values(Loc_data, index, date):
     Loc_Table_Names = []
+
     for element in Loc_data["WeatherElement"]:
         WeatherElement_Name_zh = element["ElementName"]
-        WeatherElement_Name = ""
+        WeatherElement_Name = ""  # 氣象單位英文名稱  
+        # 單位的時段資料
         temperature_times = []
         temperature_values = []
 
+        # 擷取各時段單位數據
         for time_info in element["Time"]:
             dt = datetime.fromisoformat(time_info["DataTime"])
             WeatherElement_Name = list(time_info["ElementValue"][0].keys())[0]
             WeatherElement_value = list(time_info["ElementValue"][0].values())[0]
             temperature_times.append(dt)
             temperature_values.append(int(WeatherElement_value))
-
+        
         table_address = plot_table(
             Loc_data["LocationName"], 
             WeatherElement_Name_zh, 
@@ -59,15 +64,18 @@ def get_trend_values(Loc_data, index, date):
 
     return Loc_data["LocationName"], Loc_Table_Names
 
+# 繪表
 def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, 
                temp_times, temp_values, index, date):
 
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(14, 6))
 
+    # 限制只顯示序位 0–38 共 39 筆
     temp_times = temp_times[:39]
     temp_values = temp_values[:39]
 
+    # 轉換水平軸時間成 "12\n(三)" 格式
     weekday_map = ["一", "二", "三", "四", "五", "六", "日"]
     time_labels = [f"{dt.strftime('%H')}\n{weekday_map[dt.weekday()]}" for dt in temp_times]
 
@@ -80,7 +88,8 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
 
     ax.set_title(f"{loc_name} 每小時 {WeatherElement_Name_zh} 變化預測", fontsize=16)
 
-    xtick_locs = list(range(0, len(temp_times), 2))
+    # 設定 X 軸 tick：每三個 + 開頭結尾（限到 index 38）
+    xtick_locs = list(range(0, len(temp_times), 3))
     if 0 not in xtick_locs:
         xtick_locs.insert(0, 0)
     if len(temp_times) - 2 not in xtick_locs:
@@ -92,10 +101,13 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
     ax.set_xticks(xtick_locs)
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
 
+    # 保留左右空間
     ax.set_xlim(-0.8, len(temp_times) - 0.2)
 
+    # 顯示網格
     ax.grid(True, linestyle='--', alpha=0.5)
 
+    # Y 軸設定，避免數值標籤超出
     max_value = max(temp_values)
     min_value = min(temp_values)
     padding = max(1, int((max_value - min_value) * 0.2))
@@ -110,6 +122,7 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
 
     return save_link
 
+# 多進程處理
 def worker(args):
     loc, index, date = args
     return get_trend_values(loc, index, date)
@@ -128,6 +141,17 @@ if __name__ == "__main__":
     loc_list = data["records"]["Locations"][0]["Location"]
     args_list = [(loc, idx, date) for idx, loc in enumerate(loc_list)]
 
+    # 多進程
+    '''
+    # 可以自行調整 processes 數量
+
+    實際建議上限：不超過 CPU 實體或邏輯核心數量。例如：4 核心 8 線程的 CPU：建議上限 ≈ 8。
+
+    若設太多（如 processes=1000），可能導致：
+    - 系統過載（CPU 使用率 100%）；
+    - 任務切換過於頻繁，反而變慢；
+    - 記憶體不足或進程排程失敗。
+    '''
     with Pool(processes=cpu_count()) as pool:
         results = pool.map(worker, args_list)
 
@@ -140,3 +164,4 @@ if __name__ == "__main__":
     with open(output_file, "a", encoding="utf-8-sig") as f:
         f.write("\n\n## 資料來源\n")
         f.write("中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
+        
