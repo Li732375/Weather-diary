@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager
 from datetime import datetime
 from multiprocessing import Pool, cpu_count
+from zoneinfo import ZoneInfo
 import os
 
 # 設定 Linux/GitHub Actions 中文字型
@@ -23,6 +24,7 @@ for filename in os.listdir(tables_dir):
     file_path = os.path.join(tables_dir, filename)
     if os.path.isfile(file_path):
         os.remove(file_path)
+
 
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
 ElementName_list = ["溫度", "體感溫度", "相對濕度"]
@@ -134,7 +136,8 @@ def worker(args):
     return get_trend_values(loc, index, date)
 
 if __name__ == "__main__":
-    date = datetime.now().strftime("%Y-%m-%d")
+    # 設定時區為台北
+    date = datetime.now(ZoneInfo("Asia/Taipei")).strftime("%Y-%m-%d")
     output_file = "README.md"
 
     with open(output_file, "w", encoding="utf-8-sig") as f:
