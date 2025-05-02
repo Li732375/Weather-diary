@@ -78,7 +78,7 @@ def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name,
                temp_times, temp_values, index, date):
 
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(14, 6))
+    fig, ax = plt.subplots(figsize=(12, 6))
 
     # 限制只顯示序位 0–38 共 39 筆
     temp_times = temp_times[:39]
