@@ -15,7 +15,14 @@ def setup_chinese_font():
 setup_chinese_font()
 
 # 確保 Tables 資料夾存在
-os.makedirs("Tables", exist_ok=True)
+tables_dir = "Tables"
+os.makedirs(tables_dir, exist_ok=True)
+
+# 清空資料夾中的所有檔案
+for filename in os.listdir(tables_dir):
+    file_path = os.path.join(tables_dir, filename)
+    if os.path.isfile(file_path):
+        os.remove(file_path)
 
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
 ElementName_list = ["溫度", "體感溫度", "相對濕度"]
