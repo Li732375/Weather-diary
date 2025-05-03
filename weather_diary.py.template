@@ -7,7 +7,7 @@ from multiprocessing import Pool, cpu_count
 from zoneinfo import ZoneInfo
 import os
 
-# 設定 Linux/GitHub Actions 中文字型
+# Linux/GitHub Actions 專用，設定中文字型
 def setup_chinese_font():
     font_path = "/usr/share/fonts/NotoSansCJKtc-Regular.otf"
     prop = font_manager.FontProperties(fname=font_path)
@@ -15,9 +15,8 @@ def setup_chinese_font():
 
 setup_chinese_font()
 
-# 確保 Tables 資料夾存在
-tables_dir = "Tables"
-os.makedirs(tables_dir, exist_ok=True)
+tables_dir = "Tables"  # 設定儲存圖表的資料夾路徑
+os.makedirs(tables_dir, exist_ok=True)  # 確保 Tables 資料夾存在
 
 # 清空資料夾中的所有檔案
 for filename in os.listdir(tables_dir):
@@ -26,8 +25,13 @@ for filename in os.listdir(tables_dir):
         os.remove(file_path)
 
 
+Encoding = "utf-8-sig"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
 ElementName_list = ["溫度", "體感溫度", "相對濕度"]
+Date = datetime.now(ZoneInfo("Asia/Taipei"))  # 設定時區為台北
+Weekday_Map = ["一", "二", "三", "四", "五", "六", "日"]
+Output_File = "README.md"  # 設定輸出檔案名稱
+
 
 # 獲取天氣資料
 def get_weather_data():
@@ -37,13 +41,13 @@ def get_weather_data():
     response = requests.get(URL)
     data = response.json()
 
-    with open("3day_weather_forecast_data_KS.json", "w", encoding="utf-8-sig") as f:
+    with open("3day_weather_forecast_data_KS.json", "w", encoding=Encoding) as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     return data
 
 # 繪製每小時單位變化的數據
-def get_trend_values(location_data, index, date):
+def get_trend_values(location_data, index, Date):
     location_table_paths = []
 
     for element in location_data["WeatherElement"]:
@@ -67,7 +71,7 @@ def get_trend_values(location_data, index, date):
             data_times,
             element_values,
             index,
-            date
+            Date
         )
         location_table_paths.append(table_path)
 
@@ -75,7 +79,7 @@ def get_trend_values(location_data, index, date):
 
 # 繪表
 def plot_table(location_name, element_name_zh, element_name_en, 
-               data_times, data_values, index, date):
+               data_times, data_values, index, Date):
     
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -85,8 +89,7 @@ def plot_table(location_name, element_name_zh, element_name_en,
     data_values = data_values[:39]
 
     # 轉換時間格式為 "12\n(三)"
-    weekday_map = ["一", "二", "三", "四", "五", "六", "日"]
-    time_labels = [f"{dt.strftime('%H')}\n{weekday_map[dt.weekday()]}" for dt in data_times]
+    time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
 
     ax.plot(range(len(data_times)), data_values, marker="o", linestyle="-", color="cyan", linewidth=2)
 
@@ -114,7 +117,7 @@ def plot_table(location_name, element_name_zh, element_name_en,
     plt.tight_layout()
 
     output_dir = "Tables"
-    image_path = f"{output_dir}/{date}_{element_name_en}_{index}.png"
+    image_path = f"{output_dir}/{Date}_{element_name_en}_{index}.png"
     plt.savefig(image_path, dpi=300)
     plt.close()
 
@@ -122,21 +125,17 @@ def plot_table(location_name, element_name_zh, element_name_en,
 
 # 多進程處理
 def worker(args):
-    loc, index, date = args
-    return get_trend_values(loc, index, date)
+    loc, index, Date = args
+    return get_trend_values(loc, index, Date)
 
 if __name__ == "__main__":
-    # 設定時區為台北
-    date = datetime.now(ZoneInfo("Asia/Taipei")).strftime("%Y-%m-%d")
-    output_file = "README.md"
-
-    with open(output_file, "w", encoding="utf-8-sig") as f:
+    with open(Output_File, "w", encoding=Encoding) as f:
         f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
-        f.write(f"# {date} 高雄天氣預報\n\n")
+        f.write(f"# {Date.strftime("%Y-%m-%d")} ({Weekday_Map[Date.strftime("%A")]}) 高雄天氣預報\n")
 
     data = get_weather_data()
     loc_list = data["records"]["Locations"][0]["Location"]
-    args_list = [(loc, idx, date) for idx, loc in enumerate(loc_list)]
+    args_list = [(loc, idx, Date) for idx, loc in enumerate(loc_list)]
 
     # 多進程
     '''
@@ -153,7 +152,7 @@ if __name__ == "__main__":
         results = pool.map(worker, args_list)
 
     for District_Name, Table_links in results:
-        with open(output_file, "a", encoding="utf-8-sig") as f:
+        with open(Output_File, "a", encoding=Encoding) as f:
             f.write(f"## {District_Name}：\n")
 
             for link in Table_links:
@@ -161,6 +160,6 @@ if __name__ == "__main__":
             
             f.write("\n")
 
-    with open(output_file, "a", encoding="utf-8-sig") as f:
+    with open(Output_File, "a", encoding=Encoding) as f:
         f.write(f"\n\n## 資料來源\n")
         f.write(f"中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
