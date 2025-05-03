@@ -83,7 +83,6 @@ def get_trend_values(location_data, index, Date_Now):
 # 繪表
 def plot_table(location_name, element_name_zh, element_name_en, 
                data_times, data_values, index, Date_Now):
-    
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 6))
 
