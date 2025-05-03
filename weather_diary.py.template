@@ -48,13 +48,13 @@ def get_trend_values(location_data, index, date):
 
     for element in location_data["WeatherElement"]:
         element_name_zh = element["ElementName"]
-        element_key = ""  
+        element_name_en = ""  
         data_times = []
         element_values = []
 
         for time_info in element["Time"]:
             dt = datetime.fromisoformat(time_info["DataTime"])
-            element_key = list(time_info["ElementValue"][0].keys())[0]
+            element_name_en = list(time_info["ElementValue"][0].keys())[0]
             element_value = list(time_info["ElementValue"][0].values())[0]
 
             data_times.append(dt)
@@ -63,7 +63,7 @@ def get_trend_values(location_data, index, date):
         table_path = plot_table(
             location_data["LocationName"],
             element_name_zh,
-            element_key,
+            element_name_en,
             data_times,
             element_values,
             index,
@@ -74,8 +74,8 @@ def get_trend_values(location_data, index, date):
     return location_data["LocationName"], location_table_paths
 
 # 繪表
-def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, 
-               temp_times, temp_values, index, date):
+def plot_table(location_name, element_name_zh, element_name_en, 
+               data_times, data_values, index, date):
     
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 6))
