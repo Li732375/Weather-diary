@@ -114,9 +114,9 @@ def plot_table(location_name, element_name_zh, element_name_en,
     padding = max(1, int((max_value - min_value) * 0.2))
     ax.set_ylim(min_value - padding * 0.8, max_value + padding)
 
+    # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
-    plt.tight_layout()
-
+    
     image_path = f"{Save_Tables_Link}/{Date_Now}_{element_name_en}_{index}.png"
     plt.savefig(image_path, dpi=300)
     plt.close()
