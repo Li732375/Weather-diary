@@ -15,12 +15,12 @@ def setup_chinese_font():
 
 setup_chinese_font()
 
-tables_dir = "Tables"  # 設定儲存圖表的資料夾路徑
-os.makedirs(tables_dir, exist_ok=True)  # 確保 Tables 資料夾存在
+Save_Tables_Link = "Tables"  # 設定儲存圖表的資料夾路徑
+os.makedirs(Save_Tables_Link, exist_ok=True)  # 確保 Tables 資料夾存在
 
 # 清空資料夾中的所有檔案
-for filename in os.listdir(tables_dir):
-    file_path = os.path.join(tables_dir, filename)
+for filename in os.listdir(Save_Tables_Link):
+    file_path = os.path.join(Save_Tables_Link, filename)
     if os.path.isfile(file_path):
         os.remove(file_path)
 
@@ -83,15 +83,18 @@ def get_trend_values(location_data, index, Date_Now):
 # 繪表
 def plot_table(location_name, element_name_zh, element_name_en, 
                data_times, data_values, index, Date_Now):
-    plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(12, 6))
-
     # 限制只顯示最多 39 筆資料
     data_times = data_times[:39]
     data_values = data_values[:39]
 
     # 轉換時間格式為 "12\n(三)"
     time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
+
+    # 繪圖相關設定
+    plt.rcParams['font.family'] = 'Microsoft JhengHei'  # Windows 限定字型
+    
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(12, 6))
 
     ax.plot(range(len(data_times)), data_values, marker="o", linestyle="-", color="cyan", linewidth=2)
 
@@ -100,16 +103,16 @@ def plot_table(location_name, element_name_zh, element_name_en,
 
     ax.set_title(f"{location_name} 每小時 {element_name_zh} 變化預測", fontsize=16)
 
-    # 設定 X 軸 tick
-    xtick_locs = set(range(0, len(data_times), 3))
+    # 設定 X 軸
+    xtick_locs = set(range(0, len(data_times), 3))  # 每 3 筆顯示一次刻度
     xtick_locs.update([0, len(data_times) - 2, len(data_times) - 1])
     xtick_locs = sorted(xtick_locs)
     ax.set_xticks(xtick_locs)
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
-
     ax.set_xlim(-0.8, len(data_times) - 0.2)
     ax.grid(True, linestyle='--', alpha=0.5)
 
+    # 設定 Y 軸
     max_value = max(data_values)
     min_value = min(data_values)
     padding = max(1, int((max_value - min_value) * 0.2))
@@ -118,8 +121,7 @@ def plot_table(location_name, element_name_zh, element_name_en,
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
     plt.tight_layout()
 
-    output_dir = "Tables"
-    image_path = f"{output_dir}/{Date_Now}_{element_name_en}_{index}.png"
+    image_path = f"{Save_Tables_Link}/{Date_Now}_{element_name_en}_{index}.png"
     plt.savefig(image_path, dpi=300)
     plt.close()
 
