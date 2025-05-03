@@ -89,14 +89,17 @@ def plot_table(location_name, element_name_zh, element_name_en,
     time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
 
     # 繪圖相關設定
-    plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(12, 6))
+    plt.style.use('dark_background')  # 背景樣式
+    fig, ax = plt.subplots(figsize=(12, 6))  # 圖片尺寸比例(寬、高)
 
+    # 設定折現線條
     ax.plot(range(len(data_times)), data_values, marker="o", linestyle="-", color="cyan", linewidth=2)
 
+    # 設定點上標記字型
     for x, y in zip(range(len(data_times)), data_values):
         ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, color='white')
 
+    # 設定圖表標題
     ax.set_title(f"{location_name} 每小時 {element_name_zh} 變化預測", fontsize=16)
 
     # 設定 X 軸
@@ -117,6 +120,7 @@ def plot_table(location_name, element_name_zh, element_name_en,
     # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
     
+    # 設定儲存路徑
     image_path = f"{Save_Tables_Link}/{Date_Now}_{element_name_en}_{index}.png"
     plt.savefig(image_path, dpi=300)
     plt.close()
