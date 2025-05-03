@@ -27,9 +27,12 @@ for filename in os.listdir(tables_dir):
 
 Encoding = "utf-8-sig"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
+API_KEY = "CWA-89D1DAE0-29AF-4515-BBC7-EFFD39069B16"
 ElementName_list = ["溫度", "體感溫度", "相對濕度"]
 Date = datetime.now(ZoneInfo("Asia/Taipei"))  # 設定時區為台北
+Date_Now = Date.strftime('%Y-%m-%d')
 Weekday_Map = ["一", "二", "三", "四", "五", "六", "日"]
+Date_Weekday_zh = Weekday_Map[Date.weekday()]
 Output_File = "README.md"  # 設定輸出檔案名稱
 
 
@@ -47,7 +50,7 @@ def get_weather_data():
     return data
 
 # 繪製每小時單位變化的數據
-def get_trend_values(location_data, index, Date):
+def get_trend_values(location_data, index, Date_Now):
     location_table_paths = []
 
     for element in location_data["WeatherElement"]:
@@ -71,7 +74,7 @@ def get_trend_values(location_data, index, Date):
             data_times,
             element_values,
             index,
-            Date
+            Date_Now
         )
         location_table_paths.append(table_path)
 
@@ -79,7 +82,7 @@ def get_trend_values(location_data, index, Date):
 
 # 繪表
 def plot_table(location_name, element_name_zh, element_name_en, 
-               data_times, data_values, index, Date):
+               data_times, data_values, index, Date_Now):
     
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -117,7 +120,7 @@ def plot_table(location_name, element_name_zh, element_name_en,
     plt.tight_layout()
 
     output_dir = "Tables"
-    image_path = f"{output_dir}/{Date}_{element_name_en}_{index}.png"
+    image_path = f"{output_dir}/{Date_Now}_{element_name_en}_{index}.png"
     plt.savefig(image_path, dpi=300)
     plt.close()
 
@@ -125,17 +128,17 @@ def plot_table(location_name, element_name_zh, element_name_en,
 
 # 多進程處理
 def worker(args):
-    loc, index, Date = args
-    return get_trend_values(loc, index, Date)
+    loc, index, Date_Now = args
+    return get_trend_values(loc, index, Date_Now)
 
 if __name__ == "__main__":
     with open(Output_File, "w", encoding=Encoding) as f:
         f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
-        f.write(f"# {Date.strftime('%Y-%m-%d')} ({Weekday_Map[Date.weekday()]}) 高雄天氣預報\n")
+        f.write(f"# {Date_Now} ({Date_Weekday_zh}) 高雄天氣預報\n")
 
     data = get_weather_data()
     loc_list = data["records"]["Locations"][0]["Location"]
-    args_list = [(loc, idx, Date) for idx, loc in enumerate(loc_list)]
+    args_list = [(loc, idx, Date_Now) for idx, loc in enumerate(loc_list)]
 
     # 多進程
     '''
