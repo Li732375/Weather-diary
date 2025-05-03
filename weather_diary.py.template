@@ -43,92 +43,82 @@ def get_weather_data():
     return data
 
 # 繪製每小時單位變化的數據
-def get_trend_values(Loc_data, index, date):
-    Loc_Table_Names = []
+def get_trend_values(location_data, index, date):
+    location_table_paths = []
 
-    for element in Loc_data["WeatherElement"]:
-        WeatherElement_Name_zh = element["ElementName"]
-        WeatherElement_Name = ""  # 氣象單位英文名稱  
-        # 單位的時段資料
-        temperature_times = []
-        temperature_values = []
+    for element in location_data["WeatherElement"]:
+        element_name_zh = element["ElementName"]
+        element_key = ""  
+        data_times = []
+        element_values = []
 
-        # 擷取各時段單位數據
         for time_info in element["Time"]:
             dt = datetime.fromisoformat(time_info["DataTime"])
-            WeatherElement_Name = list(time_info["ElementValue"][0].keys())[0]
-            WeatherElement_value = list(time_info["ElementValue"][0].values())[0]
-            temperature_times.append(dt)
-            temperature_values.append(int(WeatherElement_value))
-        
-        table_address = plot_table(
-            Loc_data["LocationName"], 
-            WeatherElement_Name_zh, 
-            WeatherElement_Name, 
-            temperature_times, 
-            temperature_values, 
-            index, 
-            date)
-        Loc_Table_Names.append(table_address)
+            element_key = list(time_info["ElementValue"][0].keys())[0]
+            element_value = list(time_info["ElementValue"][0].values())[0]
 
-    return Loc_data["LocationName"], Loc_Table_Names
+            data_times.append(dt)
+            element_values.append(int(element_value))
+
+        table_path = plot_table(
+            location_data["LocationName"],
+            element_name_zh,
+            element_key,
+            data_times,
+            element_values,
+            index,
+            date
+        )
+        location_table_paths.append(table_path)
+
+    return location_data["LocationName"], location_table_paths
 
 # 繪表
 def plot_table(loc_name, WeatherElement_Name_zh, WeatherElement_Name, 
                temp_times, temp_values, index, date):
-
+    
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    # 限制只顯示序位 0–38 共 39 筆
-    temp_times = temp_times[:39]
-    temp_values = temp_values[:39]
+    # 限制只顯示最多 39 筆資料
+    data_times = data_times[:39]
+    data_values = data_values[:39]
 
-    # 轉換水平軸時間成 "12\n(三)" 格式
+    # 轉換時間格式為 "12\n(三)"
     weekday_map = ["一", "二", "三", "四", "五", "六", "日"]
-    time_labels = [f"{dt.strftime('%H')}\n{weekday_map[dt.weekday()]}" for dt in temp_times]
+    time_labels = [f"{dt.strftime('%H')}\n{weekday_map[dt.weekday()]}" for dt in data_times]
 
-    ax.plot(range(len(temp_times)), temp_values, marker="o", linestyle="-", 
-            color="cyan", linewidth=2)
+    ax.plot(range(len(data_times)), data_values, marker="o", linestyle="-", color="cyan", linewidth=2)
 
-    for x, y in zip(range(len(temp_times)), temp_values):
-        ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, 
-                color='white')
-    
-    # 設定繪圖標題
-    ax.set_title(f"{loc_name} 今明每小時 {WeatherElement_Name_zh} 預測", fontsize=20)
+    for x, y in zip(range(len(data_times)), data_values):
+        ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, color='white')
 
-    # 設定 X 軸 tick：每三個 + 開頭結尾（限到 index 38）
-    xtick_locs = list(range(0, len(temp_times), 3))
-    if 0 not in xtick_locs:
-        xtick_locs.insert(0, 0)
-    if len(temp_times) - 2 not in xtick_locs:
-        xtick_locs.append(len(temp_times) - 2)
-    if len(temp_times) - 1 not in xtick_locs:
-        xtick_locs.append(len(temp_times) - 1)
-    xtick_locs = sorted(set(xtick_locs))
+    ax.set_title(f"{location_name} 每小時 {element_name_zh} 變化預測", fontsize=16)
 
+    # 設定 X 軸 tick
+    xtick_locs = set(range(0, len(data_times), 3))
+    xtick_locs.update([0, len(data_times) - 2, len(data_times) - 1])
+    xtick_locs = sorted(xtick_locs)
     ax.set_xticks(xtick_locs)
-    ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=16)
-    ax.set_xlim(-0.8, len(temp_times) - 0.2)  # 保留左右空間
+    ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
 
-    ax.grid(True, linestyle='--', alpha=0.5)  # 顯示網格
+    ax.set_xlim(-0.8, len(data_times) - 0.2)
+    ax.grid(True, linestyle='--', alpha=0.5)
 
-    # Y 軸設定，避免數值標籤超出
-    max_value = max(temp_values)
-    min_value = min(temp_values)
+    max_value = max(data_values)
+    min_value = min(data_values)
     padding = max(1, int((max_value - min_value) * 0.2))
     ax.set_ylim(min_value - padding * 0.8, max_value + padding)
-    ax.tick_params(axis='y', labelsize=14)
 
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
     plt.tight_layout()
 
-    save_link = f"Tables/{date}_{WeatherElement_Name}_{index}.png"
-    plt.savefig(save_link, dpi=300)
+    output_dir = "Tables"
+    image_path = f"{output_dir}/{date}_{element_name_en}_{index}.png"
+    plt.savefig(image_path, dpi=300)
     plt.close()
 
-    return save_link
+    return image_path
 
 # 多進程處理
 def worker(args):
