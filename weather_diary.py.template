@@ -21,7 +21,7 @@ Save_Tables_Link = "Tables"  # 設定儲存圖表的資料夾路徑
 
 os.makedirs(Save_Tables_Link, exist_ok=True)  # 確保 Tables 資料夾存在
 
-# 清空資料夾中的所有檔案
+# 清空資料夾
 for filename in os.listdir(Save_Tables_Link):
     file_path = os.path.join(Save_Tables_Link, filename)
     if os.path.isfile(file_path):
