@@ -7,15 +7,18 @@ from multiprocessing import Pool, cpu_count
 from zoneinfo import ZoneInfo
 import os
 
-# Linux/GitHub Actions 專用，設定中文字型
-def setup_chinese_font():
-    font_path = "/usr/share/fonts/NotoSansCJKtc-Regular.otf"
-    prop = font_manager.FontProperties(fname=font_path)
-    plt.rcParams['font.family'] = prop.get_name()
 
-setup_chinese_font()
-
+Encoding = "utf-8-sig"
+API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
+ElementName_list = ["溫度", "體感溫度", "相對濕度"]
+Date = datetime.now(ZoneInfo("Asia/Taipei"))  # 設定時區為台北
+Date_Now = Date.strftime('%Y-%m-%d')
+Weekday_Map = ["一", "二", "三", "四", "五", "六", "日"]
+Date_Weekday_zh = Weekday_Map[Date.weekday()]
+Output_File = "README.md"  # 設定輸出檔案名稱
 Save_Tables_Link = "Tables"  # 設定儲存圖表的資料夾路徑
+
+
 os.makedirs(Save_Tables_Link, exist_ok=True)  # 確保 Tables 資料夾存在
 
 # 清空資料夾中的所有檔案
@@ -23,17 +26,6 @@ for filename in os.listdir(Save_Tables_Link):
     file_path = os.path.join(Save_Tables_Link, filename)
     if os.path.isfile(file_path):
         os.remove(file_path)
-
-
-Encoding = "utf-8-sig"
-API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
-API_KEY = "CWA-89D1DAE0-29AF-4515-BBC7-EFFD39069B16"
-ElementName_list = ["溫度", "體感溫度", "相對濕度"]
-Date = datetime.now(ZoneInfo("Asia/Taipei"))  # 設定時區為台北
-Date_Now = Date.strftime('%Y-%m-%d')
-Weekday_Map = ["一", "二", "三", "四", "五", "六", "日"]
-Date_Weekday_zh = Weekday_Map[Date.weekday()]
-Output_File = "README.md"  # 設定輸出檔案名稱
 
 
 # 獲取天氣資料
@@ -48,6 +40,12 @@ def get_weather_data():
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     return data
+
+# Linux/GitHub Actions 專用，設定中文字型
+def setup_chinese_font():
+    font_path = "/usr/share/fonts/NotoSansCJKtc-Regular.otf"
+    prop = font_manager.FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = prop.get_name()
 
 # 繪製每小時單位變化的數據
 def get_trend_values(location_data, index, Date_Now):
@@ -80,19 +78,17 @@ def get_trend_values(location_data, index, Date_Now):
 
     return location_data["LocationName"], location_table_paths
 
-# 繪表
+# 繪製折線圖
 def plot_table(location_name, element_name_zh, element_name_en, 
                data_times, data_values, index, Date_Now):
     # 限制只顯示最多 39 筆資料
     data_times = data_times[:39]
     data_values = data_values[:39]
 
-    # 轉換時間格式為 "12\n(三)"
+    # 轉換時間格式為 "12\n三"
     time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
 
     # 繪圖相關設定
-    plt.rcParams['font.family'] = 'Microsoft JhengHei'  # Windows 限定字型
-    
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 6))
 
@@ -105,7 +101,7 @@ def plot_table(location_name, element_name_zh, element_name_en,
 
     # 設定 X 軸
     xtick_locs = set(range(0, len(data_times), 3))  # 每 3 筆顯示一次刻度
-    xtick_locs.update([0, len(data_times) - 2, len(data_times) - 1])
+    xtick_locs.update([0, len(data_times) - 2, len(data_times) - 1])  # 顯示第一筆、倒數第二筆和最後一筆
     xtick_locs = sorted(xtick_locs)
     ax.set_xticks(xtick_locs)
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
@@ -133,6 +129,8 @@ def worker(args):
     return get_trend_values(loc, index, Date_Now)
 
 if __name__ == "__main__":
+    setup_chinese_font()
+
     with open(Output_File, "w", encoding=Encoding) as f:
         f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
         f.write(f"# {Date_Now} ({Date_Weekday_zh}) 高雄天氣預報\n")
