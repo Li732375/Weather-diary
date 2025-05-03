@@ -65,7 +65,7 @@ def get_trend_values(location_data, index, Date_Now):
             data_times.append(dt)
             element_values.append(int(element_value))
 
-        table_path = plot_table(
+        table_path = plot_line_chart(
             location_data["LocationName"],
             element_name_zh,
             element_name_en,
@@ -79,7 +79,7 @@ def get_trend_values(location_data, index, Date_Now):
     return location_data["LocationName"], location_table_paths
 
 # 繪製折線圖
-def plot_table(location_name, element_name_zh, element_name_en, 
+def plot_line_chart(location_name, element_name_zh, element_name_en, 
                data_times, data_values, index, Date_Now):
     # 限制只顯示最多 39 筆資料
     data_times = data_times[:39]
