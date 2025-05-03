@@ -10,7 +10,7 @@ import os
 
 Encoding = "utf-8-sig"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
-ElementName_list = ["溫度", "體感溫度", "相對濕度"]
+ElementName_list = ["溫度", "體感溫度", "相對濕度"]  # 設定要獲取的氣象資訊
 Date = datetime.now(ZoneInfo("Asia/Taipei"))  # 設定時區為台北
 Date_Now = Date.strftime('%Y-%m-%d')
 Weekday_Map = ["一", "二", "三", "四", "五", "六", "日"]
@@ -81,7 +81,7 @@ def get_trend_values(location_data, index, Date_Now):
 # 繪製折線圖
 def plot_line_chart(location_name, element_name_zh, element_name_en, 
                data_times, data_values, index, Date_Now):
-    # 限制只顯示最多 39 筆資料
+    # 因資料並非完整三天每小時，只顯示前 39 筆資料
     data_times = data_times[:39]
     data_values = data_values[:39]
 
