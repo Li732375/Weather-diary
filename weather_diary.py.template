@@ -222,7 +222,7 @@ def worker(args):
     return get_trend_values(loc, index, Date_Now)
 
 if __name__ == "__main__":
-    #setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
+    setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
 
     # 取得氣象資料
     data = get_weather_data()
