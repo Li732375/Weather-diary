@@ -33,10 +33,13 @@ def get_weather_data():
     element_names = ",".join(ElementName_list)
     URL = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-065?Authorization={API_KEY}&ElementName={element_names}&format=JSON&sort=time"
 
+    # 取得資料轉換為 JSON 格式
     response = requests.get(URL)
     data = response.json()
-
-    with open("3day_weather_forecast_data_KS.json", "w", encoding=Encoding) as f:
+    
+    # 儲存 JSON 結果
+    data_id = data["records"]["Locations"]["Dataid"]
+    with open(f"3day_weather_forecast_data_{data_id}.json", "w", encoding="utf-8-sig") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     return data
