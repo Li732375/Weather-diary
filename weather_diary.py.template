@@ -164,6 +164,7 @@ if __name__ == "__main__":
     with Pool(processes=cpu_count()) as pool:
         results = pool.map(worker, args_list)
 
+    # 將結果寫入 Markdown 檔案
     for District_Name, Table_links in results:
         with open(Output_File, "a", encoding=Encoding) as f:
             f.write(f"## {District_Name}：\n")
