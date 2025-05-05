@@ -148,7 +148,7 @@ if __name__ == "__main__":
     
     # 將標題寫入 Markdown 檔案
     with open(Output_File, "w", encoding=Encoding) as f:
-        city_name = data["records"]["Locations"][0]["LocationName"]
+        city_name = data["records"]["Locations"][0]["LocationsName"]
 
         f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
         f.write(f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n")
@@ -176,7 +176,7 @@ if __name__ == "__main__":
             f.write(f"## {District_Name}：\n")
 
             for link in Table_links:
-                f.write(f"![該區今明每小時變化圖]({'./' + link})\n")
+                f.write(f"![該區今明預報圖]({'./' + link})\n")
             
             f.write("\n")
 
