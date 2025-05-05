@@ -133,7 +133,7 @@ def worker(args):
     return get_trend_values(loc, index, Date_Now)
 
 if __name__ == "__main__":
-    setup_chinese_font()
+    setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
 
     with open(Output_File, "w", encoding=Encoding) as f:
         f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
