@@ -54,6 +54,7 @@ def setup_chinese_font():
 def get_trend_values(location_data, index, Date_Now):
     location_table_paths = []
 
+    # 取得地區名稱與氣象元素名稱
     for element in location_data["WeatherElement"]:
         element_name_zh = element["ElementName"]
         element_name_en = ""  
@@ -61,11 +62,13 @@ def get_trend_values(location_data, index, Date_Now):
         element_values = []
 
         for time_info in element["Time"]:
+            # 取得時間資訊
             dt = datetime.fromisoformat(time_info["DataTime"])
-            element_name_en = list(time_info["ElementValue"][0].keys())[0]
-            element_value = list(time_info["ElementValue"][0].values())[0]
-
             data_times.append(dt)
+
+            # 取得氣象數值
+            element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得英文名稱
+            element_value = list(time_info["ElementValue"][0].values())[0]  # 取得數值
             element_values.append(int(element_value))
 
         table_path = plot_line_chart(
