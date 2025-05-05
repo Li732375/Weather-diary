@@ -176,18 +176,23 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
 
     # 繪製每個區段為橫條
     for i in range(len(start_times)):
+        # 顏色插值計算
+        label_start_rgb = (0.75, 0.75, 0.75)
+        label_end_rgb = (0, 0, 1)
+        label_color = tuple(label_start_rgb[j] + y_values[i] * (label_end_rgb[j] - label_start_rgb[j]) for j in range(3))
+
         ax.barh(y=y_values[i], width=end_times[i] - start_times[i], left=start_times[i],
-                height=0.05, align='center', color='blue')
+                height=0.05, align='center', color=label_color)
 
         # 漸層文字顏色插值計算
-        start_rgb = (0.8, 0.8, 0.8)
-        end_rgb = (0.53, 0.81, 0.92)
-        color = tuple(start_rgb[j] + y_values[i] * (end_rgb[j] - start_rgb[j]) for j in range(3))
+        callouts_start_rgb = (0.8, 0.8, 0.8)
+        callouts_end_rgb = (0.53, 0.81, 0.92)
+        callouts_color = tuple(callouts_start_rgb[j] + y_values[i] * (callouts_end_rgb[j] - callouts_start_rgb[j]) for j in range(3))
 
         # 顯示數值文字（百分比）
         ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
                 y_values[i] + 0.05,
-                f"{values[i]}", ha='center', va='bottom', color=color, fontsize=12)
+                f"{values[i]}", ha='center', va='bottom', color=callouts_color, fontsize=12)
 
     # 設定 X 軸
     xticks = start_times + [end_times[-1]] if end_times[-1] not in start_times else start_times
