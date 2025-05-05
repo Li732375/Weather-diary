@@ -1,11 +1,11 @@
 import requests
 import json
 import matplotlib.pyplot as plt
+import os
 from matplotlib import font_manager
 from datetime import datetime
 from multiprocessing import Pool, cpu_count
 from zoneinfo import ZoneInfo
-import os
 
 
 Encoding = "utf-8-sig"
