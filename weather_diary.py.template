@@ -141,6 +141,7 @@ if __name__ == "__main__":
     # 取得氣象資料
     data = get_weather_data()
     
+    # 將標題寫入 Markdown 檔案
     with open(Output_File, "w", encoding=Encoding) as f:
         city_name = data["records"]["Locations"][0]["LocationName"]
 
@@ -150,7 +151,7 @@ if __name__ == "__main__":
     loc_list = data["records"]["Locations"][0]["Location"]
     args_list = [(loc, idx, Date_Now) for idx, loc in enumerate(loc_list)]
 
-    # 多進程
+    # 多進程繪圖
     '''
     # 可以自行調整 processes 數量
 
