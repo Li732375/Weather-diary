@@ -115,6 +115,8 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
     ax.set_xticks(xtick_locs)
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
     ax.set_xlim(-0.8, len(data_times) - 0.2)
+    
+    # 顯示網格
     ax.grid(True, linestyle='--', alpha=0.5)
 
     # 設定 Y 軸
