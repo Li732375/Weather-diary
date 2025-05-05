@@ -138,11 +138,15 @@ def worker(args):
 if __name__ == "__main__":
     setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
 
-    with open(Output_File, "w", encoding=Encoding) as f:
-        f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
-        f.write(f"# {Date_Now} ({Date_Weekday_zh}) 高雄天氣預報\n")
-
+    # 取得氣象資料
     data = get_weather_data()
+    
+    with open(Output_File, "w", encoding=Encoding) as f:
+        city_name = data["records"]["Locations"][0]["LocationName"]
+
+        f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
+        f.write(f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n")
+
     loc_list = data["records"]["Locations"][0]["Location"]
     args_list = [(loc, idx, Date_Now) for idx, loc in enumerate(loc_list)]
 
