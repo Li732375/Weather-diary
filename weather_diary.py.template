@@ -57,31 +57,60 @@ def get_trend_values(location_data, index, Date_Now):
     # 取得地區名稱與氣象元素名稱
     for element in location_data["WeatherElement"]:
         element_name_zh = element["ElementName"]
-        element_name_en = ""  
-        data_times = []
         element_values = []
 
-        for time_info in element["Time"]:
-            # 取得時間資訊
-            dt = datetime.fromisoformat(time_info["DataTime"])
-            data_times.append(dt)
+        if "DataTime" in element["Time"][0]:
+            data_times = []
 
-            # 取得氣象數值
-            element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得英文名稱
-            element_value = list(time_info["ElementValue"][0].values())[0]  # 取得數值
-            element_values.append(int(element_value))
+            for time_info in element["Time"]:
+                # 取得時間資訊
+                dt = datetime.fromisoformat(time_info["DataTime"])
+                data_times.append(dt)
 
-        table_path = plot_line_chart(
-            location_data["LocationName"],
-            element_name_zh,
-            element_name_en,
-            data_times,
-            element_values,
-            index,
-            Date_Now
-        )
-        location_table_paths.append(table_path)
+                # 取得氣象數值
+                element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得英文名稱
+                element_value = list(time_info["ElementValue"][0].values())[0]  # 取得數值
+                element_values.append(int(element_value))
 
+            table_path = plot_line_chart(
+                location_data["LocationName"],
+                element_name_zh,
+                element_name_en,
+                data_times,
+                element_values,
+                index,
+                Date_Now
+            )
+            location_table_paths.append(table_path)
+        
+        elif "StartTime" in element["Time"][0] and "EndTime" in element["Time"][0]:
+            data_start_times = []
+            data_end_times = []
+
+            for time_info in element["Time"]:
+                # 取得時間資訊
+                start_time = datetime.fromisoformat(time_info["StartTime"])
+                end_time = datetime.fromisoformat(time_info["EndTime"])
+                data_start_times.append(start_time)
+                data_end_times.append(end_time)
+
+                # 取得氣象數值
+                element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得英文名稱
+                element_value = list(time_info["ElementValue"][0].values())[0]  # 取得數值
+                element_values.append(int(element_value))
+
+            table_path = plot_gantt(
+                location_data["LocationName"],
+                element_name_zh,
+                element_name_en,
+                data_start_times,
+                data_end_times,
+                element_values,
+                index,
+                Date_Now
+            )
+            location_table_paths.append(table_path)
+            
     return location_data["LocationName"], location_table_paths
 
 # 繪製折線圖
@@ -135,13 +164,65 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
 
     return image_path
 
+# 繪製甘特圖
+def plot_gantt(location_name, element_name_zh, element_name_en, 
+               start_times, end_times, values, index, Date_Now):    
+    # 繪圖相關設定
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(14, 6))
+
+    # 將百分比轉換為 Y 值（例如 80% => 0.8）
+    y_values = [v / 100 for v in values]
+
+    # 繪製每個區段為橫條
+    for i in range(len(start_times)):
+        ax.barh(y=y_values[i], width=end_times[i] - start_times[i], left=start_times[i],
+                height=0.05, align='center', color='blue')
+
+        # 漸層文字顏色插值計算
+        start_rgb = (0.8, 0.8, 0.8)
+        end_rgb = (0.53, 0.81, 0.92)
+        color = tuple(start_rgb[j] + y_values[i] * (end_rgb[j] - start_rgb[j]) for j in range(3))
+
+        # 顯示數值文字（百分比）
+        ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
+                y_values[i] + 0.05,
+                f"{values[i]} %", ha='center', va='bottom', color=color, fontsize=10)
+
+    # 設定 X 軸
+    xticks = start_times + [end_times[-1]] if end_times[-1] not in start_times else start_times
+    tick_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in xticks]
+    ax.set_xticks(xticks)
+    ax.set_xticklabels(tick_labels, rotation=0, fontsize=12)
+    margin = timedelta(hours=1)  # 設定 X 軸邊界距離
+    ax.set_xlim(min(start_times) - margin, max(end_times) + margin)
+
+    # 設定 Y 軸
+    ax.set_yticks([i / 100 for i in range(0, 105, 10)])
+    ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=12)
+    ax.set_ylim(0, 1)
+
+    # 設定圖表標題
+    ax.set_title(f"{location_name} {element_name_zh} 預測", fontsize=16)
+    ax.grid(True, linestyle='--', alpha=0.3)
+
+    # 設定圖框之間距離
+    plt.subplots_adjust(left=0.08, right=0.92, top=0.9, bottom=0.25)
+    
+    # 設定儲存路徑
+    image_path = f"{Save_Tables_Link}/{Date_Now}_{element_name_en}_{index}.png"
+    plt.savefig(image_path, dpi=300)
+    plt.close()
+
+    return image_path
+
 # 多進程處理
 def worker(args):
     loc, index, Date_Now = args
     return get_trend_values(loc, index, Date_Now)
 
 if __name__ == "__main__":
-    setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
+    #setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
 
     # 取得氣象資料
     data = get_weather_data()
@@ -181,5 +262,5 @@ if __name__ == "__main__":
             f.write("\n")
 
     with open(Output_File, "a", encoding=Encoding) as f:
-        f.write(f"\n\n## 資料來源\n")
+        f.write(f"\n\n## 資料來源")
         f.write(f"中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
