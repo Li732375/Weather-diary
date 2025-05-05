@@ -201,7 +201,7 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
     ax.set_ylim(0, 1)
 
     # 設定圖表標題
-    ax.set_title(f"{location_name} {element_name_zh} 預測", fontsize=16)
+    ax.set_title(f"{location_name} 未來每 {element_name_zh} 預測", fontsize=16)
     ax.grid(True, linestyle='--', alpha=0.3)
 
     # 設定圖框之間距離
