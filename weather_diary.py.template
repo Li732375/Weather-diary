@@ -169,7 +169,7 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
                start_times, end_times, values, index, Date_Now):    
     # 繪圖相關設定
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(14, 6))
+    fig, ax = plt.subplots(figsize=(12, 6))
 
     # 將百分比轉換為 Y 值（例如 80% => 0.8）
     y_values = [v / 100 for v in values]
@@ -187,19 +187,19 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
         # 顯示數值文字（百分比）
         ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
                 y_values[i] + 0.05,
-                f"{values[i]} %", ha='center', va='bottom', color=color, fontsize=10)
+                f"{values[i]}", ha='center', va='bottom', color=color, fontsize=12)
 
     # 設定 X 軸
     xticks = start_times + [end_times[-1]] if end_times[-1] not in start_times else start_times
     tick_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in xticks]
     ax.set_xticks(xticks)
-    ax.set_xticklabels(tick_labels, rotation=0, fontsize=12)
+    ax.set_xticklabels(tick_labels, rotation=0, fontsize=14)
     margin = timedelta(hours=1)  # 設定 X 軸邊界距離
     ax.set_xlim(min(start_times) - margin, max(end_times) + margin)
 
     # 設定 Y 軸
     ax.set_yticks([i / 100 for i in range(0, 105, 10)])
-    ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=12)
+    ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=14)
     ax.set_ylim(0, 1)
 
     # 設定圖表標題
