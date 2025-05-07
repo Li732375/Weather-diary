@@ -249,10 +249,6 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
 def interpolate_color(value, start_rgb, end_rgb):
     return tuple(start_rgb[j] + value * (end_rgb[j] - start_rgb[j]) for j in range(3))
 
-# 多進程處理
-def worker(args):
-    loc, index, Date_Now = args
-    return get_trend_values(loc, index, Date_Now)
 
 if __name__ == "__main__":
     setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
@@ -282,7 +278,7 @@ if __name__ == "__main__":
     - 記憶體不足或進程排程失敗。
     '''
     with Pool(processes=cpu_count()) as pool:
-        results = pool.map(worker, args_list)
+        results = pool.starmap(get_trend_values, args_list)
 
     # 將結果寫入 Markdown 檔案
     for District_Name, Table_links in results:
