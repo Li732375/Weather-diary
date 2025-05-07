@@ -19,7 +19,7 @@ Output_File = "README.md"  # 設定輸出檔案名稱
 Save_Tables_Link = "Tables"  # 設定儲存圖表的資料夾路徑
 DAY_BG_COLOR_DARK = "#000000"  # 設定圖表背景顏色 DAY_BG_COLOR_DARK
 DAY_BG_COLOR_LIGHT = "#ffffff"  # 設定圖表前景顏色
-TABLE_ALPHA = 0.15  # 設定圖表背景透明度
+TABLE_ALPHA = 0.1  # 設定圖表背景透明度
 
 
 os.makedirs(Save_Tables_Link, exist_ok=True)  # 確保 Tables 資料夾存在
