@@ -17,6 +17,9 @@ Weekday_Map = ["一", "二", "三", "四", "五", "六", "日"]
 Date_Weekday_zh = Weekday_Map[Date.weekday()]
 Output_File = "README.md"  # 設定輸出檔案名稱
 Save_Tables_Link = "Tables"  # 設定儲存圖表的資料夾路徑
+DAY_BG_COLOR_DARK = "#000000"  # 設定圖表背景顏色 DAY_BG_COLOR_DARK
+DAY_BG_COLOR_LIGHT = "#ffffff"  # 設定圖表前景顏色
+TABLE_ALPHA = 0.15  # 設定圖表背景透明度
 
 
 os.makedirs(Save_Tables_Link, exist_ok=True)  # 確保 Tables 資料夾存在
@@ -127,6 +130,20 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
     plt.style.use('dark_background')  # 背景樣式
     fig, ax = plt.subplots(figsize=(12, 6))  # 圖片尺寸比例(寬、高)
 
+    # 設定跨日背景
+    prev_day = data_times[0].day
+    start_idx = 0
+    color_toggle = True  # 控制背景顏色交錯
+
+    for i, dt in enumerate(data_times):
+        if dt.day != prev_day or i == len(data_times) - 1:
+            end_idx = i if dt.day != prev_day else i + 1
+            color = DAY_BG_COLOR_DARK if color_toggle else DAY_BG_COLOR_LIGHT
+            ax.axvspan(start_idx, end_idx, color=color, alpha=TABLE_ALPHA)
+            prev_day = dt.day
+            start_idx = i
+            color_toggle = not color_toggle
+
     # 設定折現線條
     ax.plot(range(len(data_times)), data_values, marker="o", linestyle="-", color="cyan", linewidth=2)
 
@@ -170,6 +187,20 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
     # 繪圖相關設定
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, 6))
+
+    # 設定跨日背景
+    prev_day = start_times[0].day
+    start_idx = start_times[0]
+    color_toggle = True  # 控制顏色交錯
+
+    for i, dt in enumerate(start_times):
+        if dt.day != prev_day or i == len(start_times) - 1:
+            end_idx = dt if dt.day != prev_day else end_times[-1]
+            color = DAY_BG_COLOR_DARK if color_toggle else DAY_BG_COLOR_LIGHT
+            ax.axvspan(start_idx, end_idx, color=color, alpha=TABLE_ALPHA)
+            prev_day = dt.day
+            start_idx = dt
+            color_toggle = not color_toggle
 
     # 將百分比轉換為 Y 值（例如 80% => 0.8）
     y_values = [v / 100 for v in values]
