@@ -153,6 +153,9 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
 
     # 設定圖表標題
     ax.set_title(f"{location_name} 每小時 {element_name_zh} 變化預測", fontsize=16)
+    
+    # 顯示網格
+    ax.grid(True, linestyle='--', alpha=0.5)
 
     # 設定 X 軸
     xtick_locs = set(range(0, len(data_times), 3))  # 每 3 筆顯示一次刻度
@@ -162,9 +165,6 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
     ax.set_xlim(-0.8, len(data_times) - 0.2)
     
-    # 顯示網格
-    ax.grid(True, linestyle='--', alpha=0.5)
-
     # 設定 Y 軸
     max_value = max(data_values)
     min_value = min(data_values)
@@ -218,6 +218,12 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
                 y_values[i] + 0.05,
                 f"{values[i]}", ha='center', va='bottom', color=callouts_color, fontsize=12)
 
+    # 設定圖表標題
+    ax.set_title(f"{location_name} 未來每 {element_name_zh} 預測", fontsize=16)
+    
+    # 顯示網格
+    ax.grid(True, linestyle='--', alpha=0.3)
+
     # 設定 X 軸
     xticks = start_times + [end_times[-1]] if end_times[-1] not in start_times else start_times
     tick_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in xticks]
@@ -230,10 +236,6 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
     ax.set_yticks([i / 100 for i in range(0, 105, 10)])
     ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=14)
     ax.set_ylim(0, 1)
-
-    # 設定圖表標題
-    ax.set_title(f"{location_name} 未來每 {element_name_zh} 預測", fontsize=16)
-    ax.grid(True, linestyle='--', alpha=0.3)
 
     # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.9, bottom=0.25)
@@ -280,7 +282,7 @@ if __name__ == "__main__":
     with Pool(processes=cpu_count()) as pool:
         results = pool.starmap(get_trend_values, args_list)
 
-    # 將結果寫入 Markdown 檔案
+    # 將結果逐筆寫入 Markdown 檔案
     for District_Name, Table_links in results:
         with open(Output_File, "a", encoding=Encoding) as f:
             f.write(f"## {District_Name}：\n")
