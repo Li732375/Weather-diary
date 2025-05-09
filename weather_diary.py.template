@@ -5,7 +5,8 @@ import os
 from matplotlib import font_manager
 from datetime import datetime, timedelta
 from multiprocessing import Pool, cpu_count
-from zoneinfo import ZoneInfo
+from zoneinfo import 
+from matplotlib.ticker import MaxNLocator
 
 
 Encoding = "utf-8-sig"
@@ -170,6 +171,7 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
     min_value = min(data_values)
     padding = max(1, int((max_value - min_value) * 0.2))
     ax.set_ylim(min_value - padding * 0.8, max_value + padding)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
