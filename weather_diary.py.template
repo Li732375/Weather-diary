@@ -5,7 +5,7 @@ import os
 from matplotlib import font_manager
 from datetime import datetime, timedelta
 from multiprocessing import Pool, cpu_count
-from zoneinfo import 
+from zoneinfo import ZoneInfo
 from matplotlib.ticker import MaxNLocator
 
 
