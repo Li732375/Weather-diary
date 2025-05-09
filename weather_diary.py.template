@@ -257,16 +257,6 @@ if __name__ == "__main__":
 
     # 取得氣象資料
     data = get_weather_data()
-    
-    # 將標題寫入 Markdown 檔案
-    with open(Output_File, "w", encoding=Encoding) as f:
-        city_name = data["records"]["Locations"][0]["LocationsName"]
-
-        f.write(f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n")
-        f.write(f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n")
-
-    loc_list = data["records"]["Locations"][0]["Location"]
-    args_list = [(loc, idx, Date_Now) for idx, loc in enumerate(loc_list)]
 
     # 多進程繪圖
     '''
@@ -279,19 +269,29 @@ if __name__ == "__main__":
     - 任務切換過於頻繁，反而變慢；
     - 記憶體不足或進程排程失敗。
     '''
+    loc_list = data["records"]["Locations"][0]["Location"]
+    args_list = [(loc, idx, Date_Now) for idx, loc in enumerate(loc_list)]
+
     with Pool(processes=cpu_count()) as pool:
         results = pool.starmap(get_trend_values, args_list)
 
-    # 將結果逐筆寫入 Markdown 檔案
-    for District_Name, Table_links in results:
-        with open(Output_File, "a", encoding=Encoding) as f:
-            f.write(f"## {District_Name}：\n")
+    # 寫入 Markdown 檔案
+    city_name = data["records"]["Locations"][0]["LocationsName"]
+    Output_File_content = [
+        f"一個每日自動更新氣象資料的專案，每日上午 7 點更新\n\n",
+        f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n",
+    ]
 
-            for link in Table_links:
-                f.write(f"![該區今明預報圖]({'./' + link})\n")
-            
-            f.write("\n")
+    for District_Name, Table_links in results:
+        Output_File_content.append(f"## {District_Name}：\n")
+
+        for link in Table_links:
+            Output_File_content.append(f"![該區今明預報圖]({'./' + link})\n")
+        
+        Output_File_content.append("\n")
+
+    Output_File_content.append(f"\n\n## 資料來源")
+    Output_File_content.append(f"\n中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
 
     with open(Output_File, "a", encoding=Encoding) as f:
-        f.write(f"\n\n## 資料來源")
-        f.write(f"中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
+        f.writelines(Output_File_content)
