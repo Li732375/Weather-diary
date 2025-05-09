@@ -170,6 +170,7 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
     min_value = min(data_values)
     padding = max(1, int((max_value - min_value) * 0.2))
     ax.set_ylim(min_value - padding * 0.8, max_value + padding)
+    ax.set_yticks(range(int(min(data_values)) - 1, int(max(data_values)) + 2))
 
     # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
