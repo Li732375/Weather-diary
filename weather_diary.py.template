@@ -215,7 +215,7 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
         # 顯示數值文字（百分比）
         callouts_color = interpolate_color(y_values[i], (0.8, 0.8, 0.8), (0.53, 0.81, 0.92))  # 漸層文字顏色插值計算
         ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
-                y_values[i] + 0.05,
+                y_values[i] + 0.03,
                 f"{values[i]}", ha='center', va='bottom', color=callouts_color, fontsize=12)
 
     # 設定圖表標題
