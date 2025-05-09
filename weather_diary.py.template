@@ -176,7 +176,7 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
     
     # 設定儲存路徑
     image_path = f"{Save_Tables_Link}/{Date_Now}_{element_name_en}_{index}.png"
-    plt.savefig(image_path, dpi=300)
+    plt.savefig(image_path, dpi=100)
     plt.close()
 
     return image_path
@@ -242,7 +242,7 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
     
     # 設定儲存路徑
     image_path = f"{Save_Tables_Link}/{Date_Now}_{element_name_en}_{index}.png"
-    plt.savefig(image_path, dpi=300)
+    plt.savefig(image_path, dpi=100)
     plt.close()
 
     return image_path
