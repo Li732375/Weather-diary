@@ -235,7 +235,7 @@ def plot_gantt(location_name, element_name_zh, element_name_en,
     # 設定 Y 軸
     ax.set_yticks([i / 100 for i in range(0, 105, 10)])
     ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=14)
-    ax.set_ylim(0, 1.2)
+    ax.set_ylim(0, 1.1)
 
     # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.9, bottom=0.25)
