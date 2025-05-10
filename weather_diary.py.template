@@ -295,5 +295,5 @@ if __name__ == "__main__":
     Output_File_content.append(f"\n\n## 資料來源")
     Output_File_content.append(f"\n中央氣象署開放資料平臺 API：https://opendata.cwa.gov.tw/dist/opendata-swagger.html#/%E9%A0%90%E5%A0%B1/get_v1_rest_datastore_F_D0047_065\n\n")
 
-    with open(Output_File, "a", encoding=Encoding) as f:
+    with open(Output_File, "w", encoding=Encoding) as f:
         f.writelines(Output_File_content)
