@@ -297,3 +297,6 @@ if __name__ == "__main__":
 
     with open(Output_File, "w", encoding=Encoding) as f:
         f.writelines(Output_File_content)
+
+        now_time = datetime.now(ZoneInfo("Asia/Taipei"))
+        f.write(f"\n\n {now_time.strftime('%Y-%m-%d %H:%M:%S')} 更")
