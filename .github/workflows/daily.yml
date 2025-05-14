@@ -2,7 +2,7 @@ name: Daily Weather Update
 
 on:
   schedule:
-    - cron: '22 22 * * *'  # 台灣時間每天 07:00 執行（UTC+8 → 23:00 UTC）
+    - cron: '42 20 * * *'  # 台灣時間每天 05:00 執行（UTC+8 → 23:00 UTC）
   workflow_dispatch:
 
 jobs:
