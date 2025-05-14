@@ -280,7 +280,6 @@ if __name__ == "__main__":
     # 寫入 Markdown 檔案
     city_name = data["records"]["Locations"][0]["LocationsName"]
     Output_File_content = [
-        f"一個每日自動更新氣象資料的專案，每日上午 5 點更新\n\n",
         f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n",
     ]
 
