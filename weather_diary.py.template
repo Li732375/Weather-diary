@@ -120,11 +120,11 @@ def get_trend_values(location_data, index, Date_Now):
 # 繪製折線圖
 def plot_line_chart(location_name, element_name_zh, element_name_en, 
                data_times, data_values, index, Date_Now):
-    # 因資料並非完整三天每小時，只顯示前 39 筆資料
-    data_times = data_times[:39]
-    data_values = data_values[:39]
+    # 單日僅需顯示前 25 筆資料
+    data_times = data_times[:25]
+    data_values = data_values[:25]
 
-    # 轉換時間格式為 "12\n三"
+    # 轉換時間格式為 "時\n星期"
     time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
 
     # 繪圖相關設定
@@ -150,28 +150,33 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
 
     # 設定點上標記字型
     for x, y in zip(range(len(data_times)), data_values):
-        ax.text(x, y + 0.3, f"{y:.0f}", ha='center', va='bottom', fontsize=14, color='white')
+        ax.text(x, 
+                y + 0.15, 
+                f"{y:.0f}", 
+                ha='center', 
+                va='bottom', 
+                fontsize=18, 
+                color='white',
+                fontweight='bold')
 
     # 設定圖表標題
     ax.set_title(f"{location_name} 每小時 {element_name_zh} 變化預測", fontsize=20)
     
-    # 顯示網格
-    ax.grid(True, linestyle='--', alpha=0.5)
-
     # 設定 X 軸
-    xtick_locs = set(range(0, len(data_times), 3))  # 每 3 筆顯示一次刻度
+    xtick_locs = set(range(0, len(data_times), 2))  # 每 2 筆顯示刻度
     xtick_locs.update([0, len(data_times) - 2, len(data_times) - 1])  # 顯示第一筆、倒數第二筆和最後一筆
     xtick_locs = sorted(xtick_locs)
     ax.set_xticks(xtick_locs)
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
     ax.set_xlim(-0.8, len(data_times) - 0.2)
     
-    # 設定 Y 軸
+    # 設定 Y 軸（隱藏）
     max_value = max(data_values)
     min_value = min(data_values)
     padding = max(1, int((max_value - min_value) * 0.2))
     ax.set_ylim(min_value - padding * 0.8, max_value + padding)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    ax.yaxis.set_visible(False)
 
     # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
@@ -185,10 +190,17 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
 
 # 繪製甘特圖
 def plot_gantt_chart(location_name, element_name_zh, element_name_en, 
-               start_times, end_times, values, index, Date_Now):    
+               start_times, end_times, values, index, Date_Now):
+    # 單日僅需顯示前 8 筆資料
+    start_times = start_times[:8]
+    end_times = end_times[:8]
+    values = values[:8]
+
+    plt.rcParams['font.family'] = 'Microsoft JhengHei'  # Windows 限定字型
+        
     # 繪圖相關設定
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(12, 6))
+    _, ax = plt.subplots(figsize=(14, 6))
 
     # 設定跨日背景
     prev_day = start_times[0].day
@@ -204,21 +216,30 @@ def plot_gantt_chart(location_name, element_name_zh, element_name_en,
             start_idx = dt
             color_toggle = not color_toggle
 
-    # 將百分比轉換為 Y 值（例如 80% => 0.8）
+    # 將百分比轉換為 Y 值
     y_values = [v / 100 for v in values]
 
     # 繪製每個區段為橫條
     for i in range(len(start_times)):
         # 繪出區段橫條
         label_color = interpolate_color(y_values[i], (0.75, 0.75, 0.75), (0, 0, 1))  # 漸層顏色插值計算
-        ax.barh(y=y_values[i], width=end_times[i] - start_times[i], left=start_times[i],
-                height=0.05, align='center', color=label_color)
+        ax.barh(y=y_values[i], 
+                width=end_times[i] - start_times[i], 
+                left=start_times[i],
+                height=0.1, 
+                align='center', 
+                color=label_color)
 
         # 顯示數值文字（百分比）
         callouts_color = interpolate_color(y_values[i], (0.8, 0.8, 0.8), (0.53, 0.81, 0.92))  # 漸層文字顏色插值計算
         ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
-                y_values[i] + 0.03,
-                f"{values[i]}", ha='center', va='bottom', color=callouts_color, fontsize=14)
+                y_values[i] + 0.08,
+                f"{values[i]}", 
+                ha='center', 
+                va='bottom', 
+                color=callouts_color, 
+                fontsize=20,
+                fontweight='bold')
 
     # 設定圖表標題
     ax.set_title(f"{location_name} 未來每 {element_name_zh} 預測", fontsize=20)
@@ -230,14 +251,15 @@ def plot_gantt_chart(location_name, element_name_zh, element_name_en,
     xticks = start_times + [end_times[-1]] if end_times[-1] not in start_times else start_times
     tick_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in xticks]
     ax.set_xticks(xticks)
-    ax.set_xticklabels(tick_labels, rotation=0, fontsize=14)
+    ax.set_xticklabels(tick_labels, rotation=0, fontsize=16)
     margin = timedelta(hours=1)  # 設定 X 軸邊界距離
     ax.set_xlim(min(start_times) - margin, max(end_times) + margin)
 
-    # 設定 Y 軸
+    # 設定 Y 軸（隱藏）
     ax.set_yticks([i / 100 for i in range(0, 105, 10)])
     ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=14)
     ax.set_ylim(0, 1.1)
+    ax.yaxis.set_visible(False)
 
     # 設定圖框之間距離
     plt.subplots_adjust(left=0.08, right=0.92, top=0.9, bottom=0.25)
