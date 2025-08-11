@@ -275,6 +275,7 @@ if __name__ == "__main__":
     args_list = [(loc, idx, Date_Now) for idx, loc in enumerate(loc_list)]
 
     with Pool(processes=cpu_count()) as pool:
+        # 繪圖
         results = pool.starmap(get_trend_values, args_list)
 
     # 寫入 Markdown 檔案
