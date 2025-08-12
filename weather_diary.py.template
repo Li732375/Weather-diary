@@ -197,9 +197,7 @@ def plot_gantt_chart(location_name, element_name_zh, element_name_en,
     start_times = start_times[:8]
     end_times = end_times[:8]
     values = values[:8]
-
-    plt.rcParams['font.family'] = 'Microsoft JhengHei'  # Windows 限定字型
-        
+    
     # 繪圖相關設定
     plt.style.use('dark_background')
     _, ax = plt.subplots(figsize=(14, 6))
