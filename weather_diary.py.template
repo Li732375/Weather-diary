@@ -164,8 +164,8 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
                  fontsize=20)
     
     # 設定 X 軸
-    xtick_locs = set(range(0, len(data_times), 2))  # 每 2 筆顯示刻度
-    xtick_locs.update([0, len(data_times) - 2, len(data_times) - 1])  # 顯示第一筆、倒數第二筆和最後一筆
+    xtick_locs = set(range(0, len(data_times), 3))  # 每 3 筆顯示刻度
+    xtick_locs.update([0, len(data_times) - 1])  # 確保顯示第一筆和最後一筆
     xtick_locs = sorted(xtick_locs)
     ax.set_xticks(xtick_locs)
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=14)
