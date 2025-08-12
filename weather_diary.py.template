@@ -181,7 +181,7 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
     ax.yaxis.set_visible(False)
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
-    plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.15)
+    plt.subplots_adjust(left=0.02, right=0.98, top=0.92, bottom=0.13)
     
     # 設定儲存路徑
     image_path = f"{Save_Floder_Link}/{Date_Now}_{element_name_en}_{Geocode}.png"
@@ -265,7 +265,7 @@ def plot_gantt_chart(location_name, element_name_zh, element_name_en,
     ax.yaxis.set_visible(False)
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
-    plt.subplots_adjust(left=0.08, right=0.92, top=0.9, bottom=0.25)
+    plt.subplots_adjust(left=0.02, right=0.98, top=0.92, bottom=0.13)
     
     # 設定儲存路徑
     image_path = f"{Save_Floder_Link}/{Date_Now}_{element_name_en}_{Geocode}.png"
