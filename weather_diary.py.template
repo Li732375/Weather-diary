@@ -297,7 +297,7 @@ if __name__ == "__main__":
     - 記憶體不足或進程排程失敗。
     '''
     loc_list = data["records"]["Locations"][0]["Location"]
-    args_list = [(loc, Date_Now) for loc in enumerate(loc_list)]
+    args_list = [(loc, Date_Now) for loc in loc_list]
 
     with Pool(processes=cpu_count()) as pool:
         # 繪圖
