@@ -72,7 +72,7 @@ def get_trend_values(location_data, index, Date_Now):
                 data_times.append(dt)
 
                 # 取得氣象因子數值
-                element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得英文名稱
+                element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得因子英文名稱
                 element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子數值
                 element_values.append(int(element_value))
 
@@ -99,7 +99,7 @@ def get_trend_values(location_data, index, Date_Now):
                 data_end_times.append(end_time)
 
                 # 取得氣象因子數值
-                element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得英文名稱
+                element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得因子英文名稱
                 element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子數值
                 element_values.append(int(element_value))
 
