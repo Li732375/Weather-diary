@@ -157,7 +157,8 @@ def plot_line_chart(location_name, element_name_zh, element_name_en,
                 va='bottom', 
                 fontsize=18, 
                 color='white',
-                fontweight='bold')
+                fontweight='bold'
+                )
 
     # 設定圖表標題
     ax.set_title(f"{location_name} 每小時 {element_name_zh} 變化預測",  
@@ -229,7 +230,8 @@ def plot_gantt_chart(location_name, element_name_zh, element_name_en,
                 left=start_times[i],
                 height=0.1, 
                 align='center', 
-                color=label_color)
+                color=label_color
+                )
 
         # 顯示數值文字（百分比）
         callouts_color = interpolate_color(y_values[i], (0.8, 0.8, 0.8), (0.53, 0.81, 0.92))  # 漸層文字顏色插值計算
@@ -240,7 +242,8 @@ def plot_gantt_chart(location_name, element_name_zh, element_name_en,
                 va='bottom', 
                 color=callouts_color, 
                 fontsize=20,
-                fontweight='bold')
+                fontweight='bold'
+                )
 
     # 設定圖表標題
     ax.set_title(f"{location_name} 未來每 {element_name_zh} 預測", 
