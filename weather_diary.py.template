@@ -181,7 +181,7 @@ def plot_line_chart(title_name, table_name, data_times, data_values):
     ax.yaxis.set_visible(False)
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
-    plt.subplots_adjust(left=0.02, right=0.98, top=0.92, bottom=0.13)
+    plt.subplots_adjust(left=0.02, right=0.98, top=0.90, bottom=0.13)
     
     # 設定儲存路徑
     image_path = f"{Save_Floder_Link}/{table_name}.png"
@@ -263,7 +263,7 @@ def plot_gantt_chart(title_name, table_name, start_times, end_times, data_values
     ax.yaxis.set_visible(False)
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
-    plt.subplots_adjust(left=0.02, right=0.98, top=0.92, bottom=0.13)
+    plt.subplots_adjust(left=0.02, right=0.98, top=0.90, bottom=0.13)
     
     # 設定儲存路徑
     image_path = f"{Save_Floder_Link}/{table_name}.png"
