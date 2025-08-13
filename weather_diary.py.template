@@ -75,13 +75,13 @@ def get_trend_values(location_data, Date_Now):
                 element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子單筆數值
                 element_values.append(int(element_value))
 
+            title_name = f"{location_data["LocationName"]} {element_name_zh} 預測"
+            table_name = f"{Date_Now}_{element_name_en}_{location_data["Geocode"]}"
+            
             table_path = plot_line_chart(
-                location_data["LocationName"],
-                element_name_zh,
-                location_data["Geocode"],
-                element_name_en,
+                title_name,
+                table_name,
                 data_times,
-                Date_Now,
                 element_values
             )
             location_table_paths.append(table_path)
@@ -102,23 +102,22 @@ def get_trend_values(location_data, Date_Now):
                 element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子單筆數值
                 element_values.append(int(element_value))
 
+            title_name = f"{location_data["LocationName"]} {element_name_zh} 預測"
+            table_name = f"{Date_Now}_{element_name_en}_{location_data["Geocode"]}"
+            
             table_path = plot_gantt_chart(
-                location_data["LocationName"],
-                element_name_zh,
-                location_data["Geocode"],
-                element_name_en,
+                title_name,
+                table_name,
                 data_start_times,
                 data_end_times,
-                Date_Now,
                 element_values
             )
             location_table_paths.append(table_path)
             
     return location_data["LocationName"], location_table_paths
 
-# 繪製折線圖
-def plot_line_chart(location_name, element_name_zh, Geocode, element_name_en, 
-                    data_times, Date_Now, data_values):
+# 繪製單因子折線圖
+def plot_line_chart(title_name, table_name, data_times, data_values):
     # 單日僅需顯示前 25 筆資料
     data_times = data_times[:25]
     data_values = data_values[:25]
@@ -160,8 +159,7 @@ def plot_line_chart(location_name, element_name_zh, Geocode, element_name_en,
                 )
 
     # 設定圖表標題
-    ax.set_title(f"{location_name} 每小時 {element_name_zh} 變化預測",  
-                 fontsize=20)
+    ax.set_title(title_name, fontsize=20)
     
     # 顯示網格
     ax.grid(True, linestyle='--', alpha=0.3)
@@ -186,15 +184,14 @@ def plot_line_chart(location_name, element_name_zh, Geocode, element_name_en,
     plt.subplots_adjust(left=0.02, right=0.98, top=0.92, bottom=0.13)
     
     # 設定儲存路徑
-    image_path = f"{Save_Floder_Link}/{Date_Now}_{element_name_en}_{Geocode}.png"
+    image_path = f"{Save_Floder_Link}/{table_name}.png"
     plt.savefig(image_path, dpi=100)
     plt.close()
 
     return image_path
 
 # 繪製甘特圖
-def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en, 
-                     start_times, end_times, Date_Now, data_values):
+def plot_gantt_chart(title_name, table_name, start_times, end_times, data_values):
     # 單日僅需顯示前 8 筆資料
     start_times = start_times[:8]
     end_times = end_times[:8]
@@ -246,8 +243,7 @@ def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en,
                 )
 
     # 設定圖表標題
-    ax.set_title(f"{location_name} 未來每 {element_name_zh} 預測", 
-                 fontsize=20)
+    ax.set_title(title_name, fontsize=20)
     
     # 顯示網格
     ax.grid(True, linestyle='--', alpha=0.3)
@@ -270,7 +266,7 @@ def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en,
     plt.subplots_adjust(left=0.02, right=0.98, top=0.92, bottom=0.13)
     
     # 設定儲存路徑
-    image_path = f"{Save_Floder_Link}/{Date_Now}_{element_name_en}_{Geocode}.png"
+    image_path = f"{Save_Floder_Link}/{table_name}.png"
     plt.savefig(image_path, dpi=100)
     plt.close()
 
