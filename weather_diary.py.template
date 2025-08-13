@@ -59,7 +59,7 @@ def get_trend_values(location_data, Date_Now):
     location_table_paths = []
 
     for element in location_data["WeatherElement"]:
-        element_name_zh = element["ElementName"]  # 取得氣象因子名稱
+        element_name_zh = element["ElementName"]  # 取得氣象因子中文名稱
         element_values = []
 
         if "DataTime" in element["Time"][0]:
