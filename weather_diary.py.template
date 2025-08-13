@@ -264,7 +264,7 @@ def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en,
     # 設定 Y 軸（隱藏）
     ax.set_yticks([i / 100 for i in range(0, 105, 10)])
     ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=14)
-    ax.set_ylim(0, 1.1)
+    ax.set_ylim(0, 1.2)
     ax.yaxis.set_visible(False)
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
