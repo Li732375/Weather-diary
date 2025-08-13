@@ -1,231 +1,231 @@
-﻿# 2025-08-12 (二) 高雄市 天氣預報
+﻿# 2025-08-13 (三) 高雄市 天氣預報
 ## 鹽埕區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_0.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_0.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_0.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_0.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000010.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000010.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000010.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000010.png)
 
 ## 鼓山區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_1.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_1.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_1.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_1.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000020.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000020.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000020.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000020.png)
 
 ## 左營區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_2.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_2.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_2.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_2.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000030.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000030.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000030.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000030.png)
 
 ## 楠梓區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_3.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_3.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_3.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_3.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000040.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000040.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000040.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000040.png)
 
 ## 三民區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_4.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_4.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_4.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_4.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000050.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000050.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000050.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000050.png)
 
 ## 新興區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_5.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_5.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_5.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_5.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000060.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000060.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000060.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000060.png)
 
 ## 前金區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_6.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_6.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_6.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_6.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000070.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000070.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000070.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000070.png)
 
 ## 苓雅區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_7.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_7.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_7.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_7.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000080.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000080.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000080.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000080.png)
 
 ## 前鎮區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_8.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_8.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_8.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_8.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000090.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000090.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000090.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000090.png)
 
 ## 旗津區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_9.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_9.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_9.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_9.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000100.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000100.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000100.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000100.png)
 
 ## 小港區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_10.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_10.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_10.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_10.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000110.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000110.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000110.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000110.png)
 
 ## 鳳山區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_11.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_11.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_11.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_11.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000120.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000120.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000120.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000120.png)
 
 ## 林園區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_12.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_12.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_12.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_12.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000130.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000130.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000130.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000130.png)
 
 ## 大寮區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_13.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_13.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_13.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_13.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000140.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000140.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000140.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000140.png)
 
 ## 大樹區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_14.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_14.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_14.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_14.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000150.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000150.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000150.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000150.png)
 
 ## 大社區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_15.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_15.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_15.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_15.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000160.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000160.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000160.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000160.png)
 
 ## 仁武區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_16.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_16.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_16.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_16.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000170.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000170.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000170.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000170.png)
 
 ## 鳥松區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_17.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_17.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_17.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_17.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000180.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000180.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000180.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000180.png)
 
 ## 岡山區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_18.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_18.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_18.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_18.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000190.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000190.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000190.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000190.png)
 
 ## 橋頭區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_19.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_19.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_19.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_19.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000200.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000200.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000200.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000200.png)
 
 ## 燕巢區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_20.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_20.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_20.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_20.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000210.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000210.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000210.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000210.png)
 
 ## 田寮區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_21.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_21.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_21.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_21.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000220.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000220.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000220.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000220.png)
 
 ## 阿蓮區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_22.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_22.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_22.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_22.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000230.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000230.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000230.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000230.png)
 
 ## 路竹區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_23.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_23.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_23.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_23.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000240.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000240.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000240.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000240.png)
 
 ## 湖內區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_24.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_24.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_24.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_24.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000250.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000250.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000250.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000250.png)
 
 ## 茄萣區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_25.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_25.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_25.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_25.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000260.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000260.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000260.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000260.png)
 
 ## 永安區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_26.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_26.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_26.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_26.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000270.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000270.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000270.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000270.png)
 
 ## 彌陀區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_27.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_27.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_27.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_27.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000280.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000280.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000280.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000280.png)
 
 ## 梓官區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_28.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_28.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_28.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_28.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000290.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000290.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000290.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000290.png)
 
 ## 旗山區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_29.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_29.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_29.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_29.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000300.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000300.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000300.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000300.png)
 
 ## 美濃區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_30.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_30.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_30.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_30.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000310.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000310.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000310.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000310.png)
 
 ## 六龜區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_31.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_31.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_31.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_31.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000320.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000320.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000320.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000320.png)
 
 ## 甲仙區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_32.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_32.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_32.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_32.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000330.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000330.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000330.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000330.png)
 
 ## 杉林區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_33.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_33.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_33.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_33.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000340.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000340.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000340.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000340.png)
 
 ## 內門區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_34.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_34.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_34.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_34.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000350.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000350.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000350.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000350.png)
 
 ## 茂林區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_35.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_35.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_35.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_35.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000360.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000360.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000360.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000360.png)
 
 ## 桃源區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_36.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_36.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_36.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_36.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000370.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000370.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000370.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000370.png)
 
 ## 那瑪夏區：
-![該區今明預報圖](./Tables/2025-08-12_Temperature_37.png)
-![該區今明預報圖](./Tables/2025-08-12_RelativeHumidity_37.png)
-![該區今明預報圖](./Tables/2025-08-12_ApparentTemperature_37.png)
-![該區今明預報圖](./Tables/2025-08-12_ProbabilityOfPrecipitation_37.png)
+![該區今明預報圖](./Tables/2025-08-13_Temperature_64000380.png)
+![該區今明預報圖](./Tables/2025-08-13_RelativeHumidity_64000380.png)
+![該區今明預報圖](./Tables/2025-08-13_ApparentTemperature_64000380.png)
+![該區今明預報圖](./Tables/2025-08-13_ProbabilityOfPrecipitation_64000380.png)
 
 
 
@@ -234,4 +234,4 @@
 
 
 
- 2025-08-12 10:24:07 更
+ 2025-08-13 10:21:11 更
