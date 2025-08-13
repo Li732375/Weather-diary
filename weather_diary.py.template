@@ -73,7 +73,7 @@ def get_trend_values(location_data, Date_Now):
 
                 # 取得氣象因子數值
                 element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得因子英文名稱
-                element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子數值
+                element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子單筆數值
                 element_values.append(int(element_value))
 
             table_path = plot_line_chart(
@@ -100,7 +100,7 @@ def get_trend_values(location_data, Date_Now):
 
                 # 取得氣象因子數值
                 element_name_en = list(time_info["ElementValue"][0].keys())[0]  # 取得因子英文名稱
-                element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子數值
+                element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子單筆數值
                 element_values.append(int(element_value))
 
             table_path = plot_gantt_chart(
