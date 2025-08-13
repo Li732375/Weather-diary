@@ -58,9 +58,8 @@ def setup_chinese_font():
 def get_trend_values(location_data, Date_Now):
     location_table_paths = []
 
-    # 取得地區名稱與氣象因子名稱
     for element in location_data["WeatherElement"]:
-        element_name_zh = element["ElementName"]
+        element_name_zh = element["ElementName"]  # 取得氣象因子名稱
         element_values = []
 
         if "DataTime" in element["Time"][0]:
