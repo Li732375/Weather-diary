@@ -199,8 +199,8 @@ def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en,
     # 單日僅需顯示前 8 筆資料
     start_times = start_times[:8]
     end_times = end_times[:8]
-    values = values[:8]
-    
+    data_values = data_values[:8]
+
     # 繪圖相關設定
     plt.style.use('dark_background')
     _, ax = plt.subplots(figsize=(14, 6))
@@ -220,7 +220,7 @@ def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en,
             color_toggle = not color_toggle
 
     # 將百分比轉換為 Y 值
-    y_values = [v / 100 for v in values]
+    y_values = [v / 100 for v in data_values]
 
     # 繪製每個區段為橫條
     for i in range(len(start_times)):
@@ -238,7 +238,7 @@ def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en,
         callouts_color = interpolate_color(y_values[i], (0.8, 0.8, 0.8), (0.53, 0.81, 0.92))  # 漸層文字顏色插值計算
         ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
                 y_values[i] + 0.08,
-                f"{values[i]}", 
+                f"{data_values[i]}", 
                 ha='center', 
                 va='bottom', 
                 color=callouts_color, 
@@ -257,13 +257,13 @@ def plot_gantt_chart(location_name, element_name_zh, Geocode, element_name_en,
     xticks = start_times + [end_times[-1]] if end_times[-1] not in start_times else start_times
     tick_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in xticks]
     ax.set_xticks(xticks)
-    ax.set_xticklabels(tick_labels, rotation=0, fontsize=16)
+    ax.set_xticklabels(tick_labels, rotation=0, fontsize=18)
     margin = timedelta(hours=1)  # 設定 X 軸邊界距離
     ax.set_xlim(min(start_times) - margin, max(end_times) + margin)
 
     # 設定 Y 軸（隱藏）
     ax.set_yticks([i / 100 for i in range(0, 105, 10)])
-    ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=18)
+    ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=14)
     ax.set_ylim(0, 1.1)
     ax.yaxis.set_visible(False)
 
