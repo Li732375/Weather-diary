@@ -81,8 +81,8 @@ def get_trend_values(location_data, Date_Now):
             table_path = plot_line_chart(
                 title_name,
                 table_name,
-                data_times,
-                element_values
+                data_times[:25],  # 單日僅需顯示前 25 筆資料
+                element_values[:25]  # 單日僅需顯示前 25 筆資料
             )
             location_table_paths.append(table_path)
         
@@ -108,9 +108,9 @@ def get_trend_values(location_data, Date_Now):
             table_path = plot_gantt_chart(
                 title_name,
                 table_name,
-                data_start_times,
-                data_end_times,
-                element_values
+                data_start_times[:8],  # 單日僅需顯示前 8 筆資料
+                data_end_times[:8],  # 單日僅需顯示前 8 筆資料
+                element_values[:8]  # 單日僅需顯示前 8 筆資料
             )
             location_table_paths.append(table_path)
             
@@ -118,10 +118,6 @@ def get_trend_values(location_data, Date_Now):
 
 # 繪製單因子折線圖
 def plot_line_chart(title_name, table_name, data_times, data_values):
-    # 單日僅需顯示前 25 筆資料
-    data_times = data_times[:25]
-    data_values = data_values[:25]
-
     # 轉換時間格式為 "時\n星期"
     time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
 
@@ -192,11 +188,6 @@ def plot_line_chart(title_name, table_name, data_times, data_values):
 
 # 繪製甘特圖
 def plot_gantt_chart(title_name, table_name, start_times, end_times, data_values):
-    # 單日僅需顯示前 8 筆資料
-    start_times = start_times[:8]
-    end_times = end_times[:8]
-    data_values = data_values[:8]
-
     # 繪圖相關設定
     plt.style.use('dark_background')
     _, ax = plt.subplots(figsize=(14, 6))
