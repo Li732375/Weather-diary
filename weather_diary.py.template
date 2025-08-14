@@ -56,7 +56,7 @@ def setup_chinese_font():
 
 # 繪製因子變化數據
 def get_trend_values(location_data, Date_Now):
-    location_table_paths = []
+    factory_dict = {}  # 儲存各因子數據
 
     # 取得該區域所有目標氣象因子數據
     for element in location_data["WeatherElement"]:
@@ -78,15 +78,11 @@ def get_trend_values(location_data, Date_Now):
 
             title_name = f"{location_data['LocationName']} {element_name_zh} 預測"
             table_name = f"{Date_Now}_{element_name_en}_{location_data['Geocode']}"
-            
-            table_path = plot_line_chart(
-                title_name,
-                table_name,
-                data_times[:25],  # 單日僅需顯示前 25 筆資料
-                element_values[:25]  # 單日僅需顯示前 25 筆資料
-            )
-            location_table_paths.append(table_path)
-        
+            factory_dict[element_name_zh] = (title_name, 
+                                             table_name, 
+                                             data_times, 
+                                             element_values)
+                   
         elif "StartTime" in element["Time"][0] and "EndTime" in element["Time"][0]:
             data_start_times = []
             data_end_times = []
@@ -105,16 +101,42 @@ def get_trend_values(location_data, Date_Now):
 
             title_name = f"{location_data['LocationName']} {element_name_zh} 預測"
             table_name = f"{Date_Now}_{element_name_en}_{location_data['Geocode']}"
-            
-            table_path = plot_gantt_chart(
-                title_name,
-                table_name,
-                data_start_times[:8],  # 單日僅需顯示前 8 筆資料
-                data_end_times[:8],  # 單日僅需顯示前 8 筆資料
-                element_values[:8]  # 單日僅需顯示前 8 筆資料
-            )
-            location_table_paths.append(table_path)
-            
+            factory_dict[element_name_zh] = (title_name, 
+                                             table_name, 
+                                             data_start_times,
+                                             data_end_times, 
+                                             element_values)
+    
+    location_table_paths = []  # 儲存該區域所有圖表路徑
+
+    # 繪製單因子折線圖
+    table_path = plot_line_chart(
+        factory_dict["相對濕度"][0],  # 標題名稱
+        factory_dict["相對濕度"][1],  # 表格名稱
+        factory_dict["相對濕度"][2][:25],  # 因子時間，單日僅需顯示前 25 筆資料
+        factory_dict["相對濕度"][3][:25]  # 因子資料，單日僅需顯示前 25 筆資料
+    )
+    location_table_paths.append(table_path)  # 儲存單因子折線圖路徑
+    
+    # 繪製多因子折線圖
+    table_name_en = f"{Date_Now}_ATemp&Temp_{location_data['Geocode']}"
+    table_path = plot_lines_chart(
+        table_name_en,  # 表格名稱
+        factory_dict["溫度"][2][:25],  # 因子時間，單日僅需顯示前 25 筆資料
+        **{k: factory_dict[k][-1][:25] for k in ["溫度", "體感溫度"]}  # 指定因子，單日僅需顯示前 25 筆資料
+    )
+    location_table_paths.append(table_path)  # 儲存多因子折線圖路徑
+
+    # 繪製甘特圖
+    table_path = plot_gantt_chart(
+        factory_dict["3小時降雨機率"][0],  # 標題名稱
+        factory_dict["3小時降雨機率"][1],  # 表格名稱
+        factory_dict["3小時降雨機率"][2][:8],  # 因子起始時間，單日僅需顯示前 25 筆資料
+        factory_dict["3小時降雨機率"][3][:8],  # 因子結束時間，單日僅需顯示前 25 筆資料
+        factory_dict["3小時降雨機率"][4][:8]  # 因子資料，單日僅需顯示前 25 筆資料
+    )
+    location_table_paths.append(table_path)  # 儲存甘特圖路徑
+
     return location_data["LocationName"], location_table_paths
 
 # 繪製單因子折線圖
@@ -268,6 +290,69 @@ def plot_gantt_chart(title_name, table_name, start_times, end_times, data_values
 def interpolate_color(value, start_rgb, end_rgb):
     return tuple(start_rgb[j] + value * (end_rgb[j] - start_rgb[j]) for j in range(3))
 
+# 繪製多因子折線圖
+def plot_lines_chart(table_name_en, data_times, **data_values_dict):
+    # 轉換時間格式為 "時\n星期"
+    time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
+
+    # 繪圖相關設定
+    plt.style.use('dark_background')  # 背景樣式
+    _, ax = plt.subplots(figsize=(12, 6))  # 圖片尺寸比例(寬、高)
+
+    # 設定跨日背景
+    prev_day = data_times[0].day
+    start_idx = 0
+    color_toggle = True  # 控制背景顏色交錯
+
+    for i, dt in enumerate(data_times):
+        if dt.day != prev_day or i == len(data_times) - 1:
+            end_idx = i if dt.day != prev_day else i + 1
+            color = DAY_BG_COLOR_DARK if color_toggle else DAY_BG_COLOR_LIGHT
+            ax.axvspan(start_idx, end_idx, color=color, alpha=TABLE_ALPHA)
+            prev_day = dt.day
+            start_idx = i
+            color_toggle = not color_toggle
+
+    # 設定折現線條
+    for element, value_list in data_values_dict.items():
+        ax.plot(range(len(data_times)), 
+                value_list,
+                marker="o", 
+                linestyle="-", 
+                linewidth=2,
+                label=element
+                )
+
+    plt.legend(fontsize=16)  # 顯示圖例
+
+    # 顯示網格
+    ax.grid(True, linestyle='--', alpha=0.3)
+    
+    # 設定 X 軸
+    xtick_locs = set(range(0, len(data_times), 3))  # 每 3 筆顯示刻度
+    xtick_locs.update([0, len(data_times) - 1])  # 確保顯示第一筆和最後一筆
+    xtick_locs = sorted(xtick_locs)
+    ax.set_xticks(xtick_locs)
+    ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=18)
+    ax.set_xlim(-0.8, len(data_times) - 0.2)
+
+    # 設定 Y 軸
+    max_value = max(max(v) for v in data_values_dict.values())
+    min_value = min(min(v) for v in data_values_dict.values())
+    padding = max(1, int((max_value - min_value) * 0.2))
+    ax.tick_params(axis='y', labelsize=16)
+    ax.set_ylim(min_value - padding * 0.8, max_value + padding)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+    # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
+    plt.subplots_adjust(left=0.04, right=0.96, top=0.92, bottom=0.13)
+    
+    # 設定儲存路徑
+    image_path = f"{Save_Floder_Link}/{table_name_en}.png"
+    plt.savefig(image_path, dpi=100)
+    plt.close()
+
+    return image_path
 
 if __name__ == "__main__":
     setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
