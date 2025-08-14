@@ -54,7 +54,7 @@ def setup_chinese_font():
     prop = font_manager.FontProperties(fname=font_path)
     plt.rcParams['font.family'] = prop.get_name()
 
-# 繪製因子變化的數據
+# 繪製因子變化數據
 def get_trend_values(location_data, Date_Now):
     location_table_paths = []
 
