@@ -11,7 +11,7 @@ from matplotlib.ticker import MaxNLocator
 
 Encoding = "utf-8-sig"
 API_KEY = "YOUR_API_KEY"  # 從 GitHub Secrets 設定
-ElementName_list = ["溫度", "體感溫度", "相對濕度", "3小時降雨機率"]  # 設定要獲取的氣象因子
+ElementName_list = ["溫度", "體感溫度", "相對濕度", "3小時降雨機率"]  # 設定目標氣象因子
 Date = datetime.now(ZoneInfo("Asia/Taipei"))  # 設定時區為台北
 Date_Now = Date.strftime('%Y-%m-%d')
 Weekday_Map = ["一", "二", "三", "四", "五", "六", "日"]
@@ -58,6 +58,7 @@ def setup_chinese_font():
 def get_trend_values(location_data, Date_Now):
     location_table_paths = []
 
+    # 取得該區域所有目標氣象因子數據
     for element in location_data["WeatherElement"]:
         element_name_zh = element["ElementName"]  # 取得氣象因子中文名稱
         element_values = []
