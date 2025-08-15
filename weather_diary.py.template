@@ -323,7 +323,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
                 label=element
                 )
 
-    plt.legend(fontsize=16)  # 顯示圖例
+    plt.legend(fontsize=18)  # 顯示圖例
 
     # 顯示網格
     ax.grid(True, linestyle='--', alpha=0.3)
