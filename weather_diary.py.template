@@ -78,8 +78,7 @@ def get_trend_values(location_data, Date_Now):
 
             title_name = f"{location_data['LocationName']} {element_name_zh} 預測"
             table_name = f"{Date_Now}_{element_name_en}_{location_data['Geocode']}"
-            factory_dict[element_name_zh] = (title_name, 
-                                             table_name, 
+            factory_dict[element_name_zh] = (table_name, 
                                              data_times, 
                                              element_values)
                    
@@ -101,21 +100,19 @@ def get_trend_values(location_data, Date_Now):
 
             title_name = f"{location_data['LocationName']} {element_name_zh} 預測"
             table_name = f"{Date_Now}_{element_name_en}_{location_data['Geocode']}"
-            factory_dict[element_name_zh] = (title_name, 
-                                             table_name, 
+            factory_dict[element_name_zh] = (table_name, 
                                              data_start_times,
                                              data_end_times, 
                                              element_values)
     
     # 依數據繪製圖表
-    location_table_paths = []  # 儲存該區域所有圖表路徑
+    location_table_paths = []  # 儲存該區所有圖表路徑
 
     # 繪製單因子折線圖
     table_path = plot_line_chart(
-        factory_dict["相對濕度"][0],  # 標題名稱
-        factory_dict["相對濕度"][1],  # 表格名稱
-        factory_dict["相對濕度"][2][:25],  # 因子時間，單日僅需顯示前 25 筆資料
-        factory_dict["相對濕度"][3][:25]  # 因子資料，單日僅需顯示前 25 筆資料
+        factory_dict["相對濕度"][0],  # 表格名稱
+        factory_dict["相對濕度"][1][:25],  # 因子時間，單日僅需顯示前 25 筆資料
+        factory_dict["相對濕度"][2][:25]  # 因子資料，單日僅需顯示前 25 筆資料
     )
     location_table_paths.append(table_path)  # 儲存單因子折線圖路徑
     
@@ -123,25 +120,24 @@ def get_trend_values(location_data, Date_Now):
     table_name_en = f"{Date_Now}_ATemp&Temp_{location_data['Geocode']}"
     table_path = plot_lines_chart(
         table_name_en,  # 表格名稱
-        factory_dict["溫度"][2][:25],  # 因子時間，單日僅需顯示前 25 筆資料
+        factory_dict["溫度"][1][:25],  # 因子時間，單日僅需顯示前 25 筆資料
         **{k: factory_dict[k][-1][:25] for k in ["溫度", "體感溫度"]}  # 指定因子，單日僅需顯示前 25 筆資料
     )
     location_table_paths.append(table_path)  # 儲存多因子折線圖路徑
 
     # 繪製甘特圖
     table_path = plot_gantt_chart(
-        factory_dict["3小時降雨機率"][0],  # 標題名稱
-        factory_dict["3小時降雨機率"][1],  # 表格名稱
-        factory_dict["3小時降雨機率"][2][:8],  # 因子起始時間，單日僅需顯示前 25 筆資料
-        factory_dict["3小時降雨機率"][3][:8],  # 因子結束時間，單日僅需顯示前 25 筆資料
-        factory_dict["3小時降雨機率"][4][:8]  # 因子資料，單日僅需顯示前 25 筆資料
+        factory_dict["3小時降雨機率"][0],  # 表格名稱
+        factory_dict["3小時降雨機率"][1][:8],  # 因子起始時間，單日僅需顯示前 25 筆資料
+        factory_dict["3小時降雨機率"][2][:8],  # 因子結束時間，單日僅需顯示前 25 筆資料
+        factory_dict["3小時降雨機率"][3][:8]  # 因子資料，單日僅需顯示前 25 筆資料
     )
     location_table_paths.append(table_path)  # 儲存甘特圖路徑
 
     return location_data["LocationName"], location_table_paths
 
 # 繪製單因子折線圖
-def plot_line_chart(title_name, table_name, data_times, data_values):
+def plot_line_chart(table_name, data_times, data_values):
     # 轉換時間格式為 "時\n星期"
     time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
 
@@ -178,9 +174,6 @@ def plot_line_chart(title_name, table_name, data_times, data_values):
                 fontweight='bold'
                 )
 
-    # 設定圖表標題
-    ax.set_title(title_name, fontsize=20)
-    
     # 顯示網格
     ax.grid(True, linestyle='--', alpha=0.3)
     
@@ -211,7 +204,7 @@ def plot_line_chart(title_name, table_name, data_times, data_values):
     return image_path
 
 # 繪製甘特圖
-def plot_gantt_chart(title_name, table_name, start_times, end_times, data_values):
+def plot_gantt_chart(table_name, start_times, end_times, data_values):
     # 繪圖相關設定
     plt.style.use('dark_background')
     _, ax = plt.subplots(figsize=(14, 6))
@@ -257,9 +250,6 @@ def plot_gantt_chart(title_name, table_name, start_times, end_times, data_values
                 fontweight='bold'
                 )
 
-    # 設定圖表標題
-    ax.set_title(title_name, fontsize=20)
-    
     # 顯示網格
     ax.grid(True, linestyle='--', alpha=0.3)
 
@@ -380,16 +370,19 @@ if __name__ == "__main__":
         results = pool.starmap(get_trend_values, args_list)
 
     # 寫入 Markdown 檔案
-    city_name = data["records"]["Locations"][0]["LocationsName"]
+    city_name = data["records"]["Locations"][0]["LocationsName"]  # 縣市名稱
     Output_File_content = [
         f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n",
     ]
 
-    for District_Name, Table_links in results:
-        Output_File_content.append(f"## {District_Name}：\n")
+    table_title_names = ["相對溼度", "溫度", "降雨機率"]  # 圖表標題
 
-        for link in Table_links:
-            Output_File_content.append(f"![該區今明預報圖]({'./' + link})\n")
+    for District_Name, Table_links in results:
+        Output_File_content.append(f"## {District_Name}：\n\n")
+
+        for link, title in zip(Table_links, table_title_names):
+            Output_File_content.append(f"### {title}\n\n")
+            Output_File_content.append(f"![該區今明預報圖]({'./' + link})\n\n")
         
         Output_File_content.append("\n")
 
