@@ -340,7 +340,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     max_value = max(max(v) for v in data_values_dict.values())
     min_value = min(min(v) for v in data_values_dict.values())
     padding = max(1, int((max_value - min_value) * 0.2))
-    ax.tick_params(axis='y', labelsize=16)
+    ax.tick_params(axis='y', labelsize=18)
     ax.set_ylim(min_value - padding * 0.8, max_value + padding)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
