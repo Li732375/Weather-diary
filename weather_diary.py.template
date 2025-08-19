@@ -313,6 +313,30 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
                 linewidth=2,
                 label=element
                 )
+        
+        # 找到最大值與最小值的數字標籤
+        max_idx = value_list.index(max(value_list))
+        min_idx = value_list.index(min(value_list))
+
+        # 標註最大值
+        ax.text(max_idx,
+                value_list[max_idx] + 0.15,
+                f"{value_list[max_idx]:.0f}",
+                ha='center',
+                va='bottom',
+                fontsize=28,
+                color='orange',
+                fontweight='bold')
+
+        # 標註最小值
+        ax.text(min_idx,
+                value_list[min_idx] - 0.5,
+                f"{value_list[min_idx]:.0f}",
+                ha='center',
+                va='top',
+                fontsize=28,
+                color='cyan',
+                fontweight='bold')
 
     plt.legend(fontsize=18)  # 顯示圖例
 
@@ -331,8 +355,8 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     max_value = max(max(v) for v in data_values_dict.values())
     min_value = min(min(v) for v in data_values_dict.values())
     padding = max(1, int((max_value - min_value) * 0.2))
-    ax.tick_params(axis='y', labelsize=18)
-    ax.set_ylim(min_value - padding * 0.8, max_value + padding)
+    ax.tick_params(axis='y', labelsize=20)
+    ax.set_ylim(min_value - padding * 1.2, max_value + padding)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
