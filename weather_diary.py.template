@@ -356,7 +356,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     min_value = min(min(v) for v in data_values_dict.values())
     padding = max(1, int((max_value - min_value) * 0.2))
     ax.tick_params(axis='y', labelsize=20)
-    ax.set_ylim(min_value - padding * 1.2, max_value + padding)
+    ax.set_ylim(min_value - padding * 1.6, max_value + padding * 1.6)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
