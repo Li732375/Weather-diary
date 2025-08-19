@@ -246,7 +246,7 @@ def plot_gantt_chart(table_name, start_times, end_times, data_values):
                 ha='center', 
                 va='bottom', 
                 color=callouts_color, 
-                fontsize=20,
+                fontsize=24,
                 fontweight='bold'
                 )
 
@@ -257,7 +257,7 @@ def plot_gantt_chart(table_name, start_times, end_times, data_values):
     xticks = start_times + [end_times[-1]] if end_times[-1] not in start_times else start_times
     tick_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in xticks]
     ax.set_xticks(xticks)
-    ax.set_xticklabels(tick_labels, rotation=0, fontsize=18)
+    ax.set_xticklabels(tick_labels, rotation=0, fontsize=20)
     margin = timedelta(hours=1)  # 設定 X 軸邊界距離
     ax.set_xlim(min(start_times) - margin, max(end_times) + margin)
 
