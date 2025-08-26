@@ -76,7 +76,6 @@ def get_trend_values(location_data, Date_Now):
                 element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子單筆數值
                 element_values.append(int(element_value))
 
-            title_name = f"{location_data['LocationName']} {element_name_zh} 預測"
             table_name = f"{Date_Now}_{element_name_en}_{location_data['Geocode']}"
             factory_dict[element_name_zh] = (table_name, 
                                              data_times, 
@@ -98,7 +97,6 @@ def get_trend_values(location_data, Date_Now):
                 element_value = list(time_info["ElementValue"][0].values())[0]  # 取得因子單筆數值
                 element_values.append(int(element_value))
 
-            title_name = f"{location_data['LocationName']} {element_name_zh} 預測"
             table_name = f"{Date_Now}_{element_name_en}_{location_data['Geocode']}"
             factory_dict[element_name_zh] = (table_name, 
                                              data_start_times,
