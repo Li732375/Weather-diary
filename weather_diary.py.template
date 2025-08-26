@@ -127,10 +127,10 @@ def get_trend_values(location_data, Date_Now):
     return location_data["LocationName"], location_table_paths
 
 # 繪製甘特圖
-def plot_gantt_chart(table_name, start_times, end_times, data_values):
+def plot_gantt_chart(table_name, start_times, end_times, data_values):    
     # 繪圖相關設定
     plt.style.use('dark_background')
-    _, ax = plt.subplots(figsize=(14, 6))
+    _, ax = plt.subplots(figsize=(14, 1.5))
 
     # 設定跨日背景
     prev_day = start_times[0].day
@@ -153,22 +153,21 @@ def plot_gantt_chart(table_name, start_times, end_times, data_values):
     for i in range(len(start_times)):
         # 繪出區段橫條
         label_color = interpolate_color(y_values[i], (0.75, 0.75, 0.75), (0, 0, 1))  # 漸層顏色插值計算
-        ax.barh(y=y_values[i], 
+        ax.barh(0.5, 
                 width=end_times[i] - start_times[i], 
                 left=start_times[i],
-                height=0.1, 
+                height=1, 
                 align='center', 
                 color=label_color
                 )
 
         # 顯示數值文字（百分比）
-        callouts_color = interpolate_color(y_values[i], (0.8, 0.8, 0.8), (0.53, 0.81, 0.92))  # 漸層文字顏色插值計算
         ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
-                y_values[i] + 0.08,
+                0.4,
                 f"{data_values[i]}", 
                 ha='center', 
-                va='bottom', 
-                color=callouts_color, 
+                va='center', 
+                color='white', 
                 fontsize=28,
                 fontweight='bold'
                 )
@@ -185,13 +184,11 @@ def plot_gantt_chart(table_name, start_times, end_times, data_values):
     ax.set_xlim(min(start_times) - margin, max(end_times) + margin)
 
     # 設定 Y 軸（隱藏）
-    ax.set_yticks([i / 100 for i in range(0, 105, 10)])
-    ax.set_yticklabels([f"{i} %" for i in range(0, 105, 10)], fontsize=14)
-    ax.set_ylim(0, 1.2)
+    ax.set_ylim(0, 1)
     ax.yaxis.set_visible(False)
 
     # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
-    plt.subplots_adjust(left=0.02, right=0.98, top=0.90, bottom=0.13)
+    plt.subplots_adjust(left=0.02, right=0.98, top=0.90, bottom=0.55)
     
     # 設定儲存路徑
     image_path = f"{Save_Floder_Link}/{table_name}.png"
@@ -351,7 +348,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     image_path = f"{Save_Floder_Link}/{table_name_en}.png"
     plt.savefig(image_path, dpi=100)
     plt.close()
-    
+
     return image_path
 
 if __name__ == "__main__":
