@@ -111,7 +111,9 @@ def get_trend_values(location_data, Date_Now):
     table_path = plot_lines_chart(
         table_name_en,  # 表格名稱
         factory_dict["溫度"][1][:25],  # 因子時間，單日僅需顯示前 25 筆資料
-        **{k: factory_dict[k][-1][:25] for k in ["溫度", "體感溫度", "相對濕度"]}  # 指定因子，單日僅需顯示前 25 筆資料
+        **{k: factory_dict[k][-1][:25] for k in ["溫度", 
+                                                 "體感溫度", 
+                                                 "相對濕度"]}  # 指定因子，單日僅需顯示前 25 筆資料
     )
     location_table_paths.append(table_path)  # 儲存多因子折線圖路徑
 
