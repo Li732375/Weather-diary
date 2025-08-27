@@ -56,7 +56,7 @@ def setup_chinese_font():
 
 # 繪製因子變化數據
 def get_trend_values(location_data, Date_Now):
-    factory_dict = {}  # 儲存各因子數據
+    factory_dict = {}  # 儲存所有因子數據
 
     # 取得該區域所有目標氣象因子數據
     for element in location_data["WeatherElement"]:
