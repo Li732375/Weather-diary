@@ -334,10 +334,10 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
              fontweight='bold'
              )
     
-    # 合併左右圖例
-    lines1, labels1 = ax.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax.legend(lines1 + lines2, labels1 + labels2, 
+    # 設定圖例
+    lines1, labels1 = ax.get_legend_handles_labels()  # 取得左 Y 軸圖例
+    lines2, labels2 = ax2.get_legend_handles_labels()  # 取得右 Y 軸圖例
+    ax.legend(lines1 + lines2, labels1 + labels2,  # 合併圖例
               fontsize=19, 
               prop={'weight': 'bold'})
 
