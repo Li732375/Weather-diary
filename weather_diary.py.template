@@ -227,9 +227,8 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
             color_toggle = not color_toggle
 
     # 切分溫度與相對溼度因子
-    items = list(data_values_dict.items())
-    Temp_and_ATemp_items = items[:-1]
-    R_Hum_item = items[-1]
+    Temp_and_ATemp_items = [(k, data_values_dict[k]) for k in ["溫度", "體感溫度"]]
+    R_Hum_item = [(k, data_values_dict[k]) for k in ["相對濕度"]]
 
     # 設定兩種溫度折現線條
     for element, value_list in Temp_and_ATemp_items:
@@ -269,16 +268,16 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     ax2 = ax.twinx()
     
     # 設定相對溼度因子折現線條
-    element, value_list = R_Hum_item
-    ax2.plot(range(len(data_times)), 
-            value_list,
-            marker="o", 
-            linestyle="-", 
-            color="#008585", 
-            linewidth=2,
-            label=element
-            )
-    
+    for element, value_list in R_Hum_item:
+        ax2.plot(range(len(data_times)), 
+                value_list,
+                marker="o", 
+                linestyle="-", 
+                color="#008585", 
+                linewidth=2,
+                label=element
+                )
+        
     # 設定點上標記字型
     for x, y in zip(range(len(data_times)), value_list):
         ax2.text(x, 
@@ -302,7 +301,6 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=18)
     ax.set_xlim(-0.8, len(data_times) - 0.2)
 
-
     # 設定左 Y 軸
     Temp_and_ATemp_values = [v for _, v in Temp_and_ATemp_items]
     max_value = max(max(v) for v in Temp_and_ATemp_values)
@@ -320,9 +318,9 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
             )
     
     # 設定右 Y 軸
-    _, R_Hum_values = [v for v in R_Hum_item]
-    max_value = max(R_Hum_values)
-    min_value = min(R_Hum_values)
+    R_Hum_values = [v for _, v in R_Hum_item]
+    max_value = max(max(v) for v in R_Hum_values)
+    min_value = min(min(v) for v in R_Hum_values)
     padding = max(1, int((max_value - min_value) * 0.2))
     ax2.tick_params(axis='y', labelsize=20)
     ax2.set_ylim(min_value - padding * 1.6, max_value + padding * 1.6)
