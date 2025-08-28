@@ -1,420 +1,268 @@
 ﻿# 2025-08-28 (四) 高雄市 天氣預報
 ## 鹽埕區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000010.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000010.png)
 
 
 ## 鼓山區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000020.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000020.png)
 
 
 ## 左營區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000030.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000030.png)
 
 
 ## 楠梓區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000040.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000040.png)
 
 
 ## 三民區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000050.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000050.png)
 
 
 ## 新興區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000060.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000060.png)
 
 
 ## 前金區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000070.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000070.png)
 
 
 ## 苓雅區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000080.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000080.png)
 
 
 ## 前鎮區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000090.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000090.png)
 
 
 ## 旗津區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000100.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000100.png)
 
 
 ## 小港區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000110.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000110.png)
 
 
 ## 鳳山區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000120.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000120.png)
 
 
 ## 林園區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000130.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000130.png)
 
 
 ## 大寮區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000140.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000140.png)
 
 
 ## 大樹區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000150.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000150.png)
 
 
 ## 大社區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000160.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000160.png)
 
 
 ## 仁武區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000170.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000170.png)
 
 
 ## 鳥松區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000180.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000180.png)
 
 
 ## 岡山區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000190.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000190.png)
 
 
 ## 橋頭區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000200.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000200.png)
 
 
 ## 燕巢區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000210.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000210.png)
 
 
 ## 田寮區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000220.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000220.png)
 
 
 ## 阿蓮區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000230.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000230.png)
 
 
 ## 路竹區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000240.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000240.png)
 
 
 ## 湖內區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000250.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000250.png)
 
 
 ## 茄萣區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000260.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000260.png)
 
 
 ## 永安區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000270.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000270.png)
 
 
 ## 彌陀區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000280.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000280.png)
 
 
 ## 梓官區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000290.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000290.png)
 
 
 ## 旗山區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000300.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000300.png)
 
 
 ## 美濃區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000310.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000310.png)
 
 
 ## 六龜區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000320.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000320.png)
 
 
 ## 甲仙區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000330.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000330.png)
 
 
 ## 杉林區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000340.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000340.png)
 
 
 ## 內門區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000350.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000350.png)
 
 
 ## 茂林區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000360.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000360.png)
 
 
 ## 桃源區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000370.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000370.png)
 
 
 ## 那瑪夏區：
 
-### 溫度 / 相對溼度
+### 溫度 / 相對溼度 / 降雨機率
 
 ![該區今明預報圖](./Tables/2025-08-28_ATemp&Temp&ReHum_64000380.png)
-
-### 降雨機率
-
-![該區今明預報圖](./Tables/2025-08-28_ProbabilityOfPrecipitation_64000380.png)
 
 
 
@@ -424,4 +272,4 @@
 
 
 
- 2025-08-28 09:16:50 更
+ 2025-08-28 11:21:28 更
