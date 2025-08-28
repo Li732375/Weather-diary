@@ -103,37 +103,49 @@ def get_trend_values(location_data, Date_Now):
                                              data_end_times, 
                                              element_values)
     
-    # 依數據繪製圖表
+    # 繪圖相關設定
+    plt.style.use('dark_background')  # 背景樣式
+    _, (ax1, ax2) = plt.subplots(  # 建立兩個子圖 (2 排, 1 欄)，並設定高度比例
+        nrows=2,
+        ncols=1,
+        figsize=(9, 6),  # 長寬比
+        gridspec_kw={'height_ratios': [10, 1]}
+    )
+
     location_table_paths = []  # 儲存該區所有圖表路徑
 
     # 繪製多因子折線圖
-    table_name_en = f"{Date_Now}_ATemp&Temp&ReHum_{location_data['Geocode']}"
-    table_path = plot_lines_chart(
-        table_name_en,  # 表格名稱
+    plot_lines_chart(
+        ax1,
         factory_dict["溫度"][1][:25],  # 因子時間，單日僅需顯示前 25 筆資料
-        **{k: factory_dict[k][-1][:25] for k in ["溫度", 
-                                                 "體感溫度", 
+        **{k: factory_dict[k][-1][:25] for k in ["溫度", \
+                                                 "體感溫度", \
                                                  "相對濕度"]}  # 指定因子，單日僅需顯示前 25 筆資料
     )
-    location_table_paths.append(table_path)  # 儲存多因子折線圖路徑
-
+    
     # 繪製甘特圖
-    table_path = plot_gantt_chart(
-        factory_dict["3小時降雨機率"][0],  # 表格名稱
+    plot_gantt_chart(
+        ax2,
         factory_dict["3小時降雨機率"][1][:8],  # 因子起始時間，單日僅需顯示前 25 筆資料
         factory_dict["3小時降雨機率"][2][:8],  # 因子結束時間，單日僅需顯示前 25 筆資料
         factory_dict["3小時降雨機率"][3][:8]  # 因子資料，單日僅需顯示前 25 筆資料
     )
-    location_table_paths.append(table_path)  # 儲存甘特圖路徑
 
+    # 調整圖距
+    plt.tight_layout()
+
+    # 輸出圖片
+    table_name_en = f"{Date_Now}_ATemp&Temp&ReHum_{location_data['Geocode']}"
+    image_path = f"{Save_Floder_Link}/{table_name_en}.png"
+    plt.savefig(image_path, dpi=100)
+    plt.close()
+
+    location_table_paths.append(image_path)
+    
     return location_data["LocationName"], location_table_paths
 
 # 繪製甘特圖
-def plot_gantt_chart(table_name, start_times, end_times, data_values):    
-    # 繪圖相關設定
-    plt.style.use('dark_background')
-    _, ax = plt.subplots(figsize=(14, 1.5))
-
+def plot_gantt_chart(ax, start_times, end_times, data_values):
     # 設定跨日背景
     prev_day = start_times[0].day
     start_idx = start_times[0]
@@ -153,8 +165,9 @@ def plot_gantt_chart(table_name, start_times, end_times, data_values):
 
     # 繪製每個區段為橫條
     for i in range(len(start_times)):
+        label_color = interpolate_color(y_values[i], (0.55, 0.55, 0.55), (0, 0, 1))  # 漸層顏色插值計算
+        
         # 繪出區段橫條
-        label_color = interpolate_color(y_values[i], (0.75, 0.75, 0.75), (0, 0, 1))  # 漸層顏色插值計算
         ax.barh(0.5, 
                 width=end_times[i] - start_times[i], 
                 left=start_times[i],
@@ -163,14 +176,14 @@ def plot_gantt_chart(table_name, start_times, end_times, data_values):
                 color=label_color
                 )
 
-        # 顯示數值文字（百分比）
+        # 顯示百分比數值
         ax.text(start_times[i] + (end_times[i] - start_times[i]) / 2,
                 0.4,
                 f"{data_values[i]}", 
                 ha='center', 
                 va='center', 
                 color='white', 
-                fontsize=28,
+                fontsize=22,
                 fontweight='bold'
                 )
     
@@ -188,30 +201,20 @@ def plot_gantt_chart(table_name, start_times, end_times, data_values):
     # 設定 Y 軸（隱藏）
     ax.set_ylim(0, 1)
     ax.yaxis.set_visible(False)
-
-    # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
-    plt.subplots_adjust(left=0.02, right=0.98, top=0.90, bottom=0.55)
-    
-    # 設定儲存路徑
-    image_path = f"{Save_Floder_Link}/{table_name}.png"
-    plt.savefig(image_path, dpi=100)
-    plt.close()
-
-    return image_path
+    ax.text(start_times[-1] + (end_times[-1] - start_times[-1]) + margin * 1.3, 
+            0.3, 
+            "( % )", 
+            fontsize=18, 
+            color='white', 
+            fontweight='bold'
+            )
 
 # 顏色插值計算
 def interpolate_color(value, start_rgb, end_rgb):
     return tuple(start_rgb[j] + value * (end_rgb[j] - start_rgb[j]) for j in range(3))
 
 # 繪製多因子折線圖
-def plot_lines_chart(table_name_en, data_times, **data_values_dict):
-    # 轉換時間格式為 "時\n星期"
-    time_labels = [f"{dt.strftime('%H')}\n{Weekday_Map[dt.weekday()]}" for dt in data_times]
-
-    # 繪圖相關設定
-    plt.style.use('dark_background')  # 背景樣式
-    _, ax = plt.subplots(figsize=(12, 6))  # 圖片尺寸比例(寬、高)
-
+def plot_lines_chart(ax, data_times, **data_values_dict):
     # 設定跨日背景
     prev_day = data_times[0].day
     start_idx = 0
@@ -250,7 +253,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
                 f"{value_list[max_idx]:.0f}",
                 ha='center',
                 va='bottom',
-                fontsize=28,
+                fontsize=24,
                 color='orange',
                 fontweight='bold')
 
@@ -260,7 +263,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
                 f"{value_list[min_idx]:.0f}",
                 ha='center',
                 va='top',
-                fontsize=28,
+                fontsize=24,
                 color='cyan',
                 fontweight='bold')
 
@@ -285,7 +288,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
                 f"{y:.0f}", 
                 ha='center', 
                 va='bottom', 
-                fontsize=18, 
+                fontsize=16, 
                 color='#9C9C9C',
                 fontweight='bold'
                 )
@@ -298,7 +301,7 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     xtick_locs.update([0, len(data_times) - 1])  # 確保顯示第一筆和最後一筆
     xtick_locs = sorted(xtick_locs)
     ax.set_xticks(xtick_locs)
-    ax.set_xticklabels([time_labels[i] for i in xtick_locs], fontsize=18)
+    ax.set_xticklabels(["" for i in xtick_locs], fontsize=0)
     ax.set_xlim(-0.8, len(data_times) - 0.2)
 
     # 設定左 Y 軸
@@ -306,13 +309,13 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     max_value = max(max(v) for v in Temp_and_ATemp_values)
     min_value = min(min(v) for v in Temp_and_ATemp_values)
     padding = max(1, int((max_value - min_value) * 0.2))
-    ax.tick_params(axis='y', labelsize=20)
-    ax.set_ylim(min_value - padding * 1.6, max_value + padding * 1.6)
+    ax.tick_params(axis='y', labelsize=18)
+    ax.set_ylim(min_value - padding * 1.6, max_value + padding * 1.9)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.text(-2.1, 
-            max_value + padding * 1.9, 
+    ax.text(-2.4, 
+            max_value + padding * 2.2, 
             "( °C )", 
-            fontsize=20, 
+            fontsize=18, 
             color='white', 
             fontweight='bold'
             )
@@ -323,13 +326,15 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     min_value = min(min(v) for v in R_Hum_values)
     padding = max(1, int((max_value - min_value) * 0.2))
     ax2.tick_params(axis='y', labelsize=20)
-    ax2.set_ylim(min_value - padding * 1.6, max_value + padding * 1.6)
+    yticks = ax2.get_yticks()
+    ax2.set_yticks(yticks)  # 先設定 ticks
+    ax2.set_yticklabels(["" for _ in yticks], fontsize=0)  # 才能設定 label
+    ax2.set_ylim(min_value - padding * 1.6, max_value + padding * 1.9)
     ax2.yaxis.set_major_locator(MaxNLocator(integer=True))
-    ax2.yaxis.set_visible(False)
-    ax2.text(len(data_times) - 0.5, 
-             max_value + padding * 1.9, 
+    ax2.text(len(data_times) - 0, 
+             max_value + padding * 2.2, 
              "( % )", 
-             fontsize=20, 
+             fontsize=18, 
              color='white', 
              fontweight='bold'
              )
@@ -338,18 +343,9 @@ def plot_lines_chart(table_name_en, data_times, **data_values_dict):
     lines1, labels1 = ax.get_legend_handles_labels()  # 取得左 Y 軸圖例
     lines2, labels2 = ax2.get_legend_handles_labels()  # 取得右 Y 軸圖例
     ax.legend(lines1 + lines2, labels1 + labels2,  # 合併圖例
-              fontsize=19, 
-              prop={'weight': 'bold'})
-
-    # 設定整張圖的內邊距（繪圖區與整體圖像之間的空間）
-    plt.subplots_adjust(left=0.05, right=0.95, top=0.92, bottom=0.13)
-    
-    # 設定儲存路徑
-    image_path = f"{Save_Floder_Link}/{table_name_en}.png"
-    plt.savefig(image_path, dpi=100)
-    plt.close()
-
-    return image_path
+              fontsize=20, 
+              prop={'weight': 'bold'},
+              ncol=3)
 
 if __name__ == "__main__":
     setup_chinese_font()  # Linux/GitHub Actions 專用，設定中文字型
@@ -381,7 +377,7 @@ if __name__ == "__main__":
         f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n",
     ]
 
-    table_title_names = ["溫度 / 相對溼度", "降雨機率"]  # 圖表標題
+    table_title_names = ["溫度 / 相對溼度 / 降雨機率"]  # 圖表標題
 
     for District_Name, Table_links in results:
         Output_File_content.append(f"## {District_Name}：\n\n")
