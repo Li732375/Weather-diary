@@ -291,7 +291,7 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
     # 設定點上標記字型
     for x, y in zip(range(len(data_times)), value_list):
         ax2.text(x, 
-                y + 0.15, 
+                y + 0.5, 
                 f"{y:.0f}", 
                 ha='center', 
                 va='bottom', 
