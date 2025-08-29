@@ -108,7 +108,7 @@ def get_trend_values(location_data, Date_Now):
     _, (ax1, ax2) = plt.subplots(  # 建立兩個子圖 (2 排, 1 欄)，並設定高度比例
         nrows=2,
         ncols=1,
-        figsize=(6, 4),  # 長寬比
+        figsize=(7, 4),  # 長寬比
         gridspec_kw={'height_ratios': [10, 1]}
     )
 
@@ -201,7 +201,7 @@ def plot_gantt_chart(ax, start_times, end_times, data_values):
     # 設定 Y 軸（隱藏）
     ax.set_ylim(0, 1)
     ax.yaxis.set_visible(False)
-    ax.text(start_times[0] - margin * 2.8, 
+    ax.text(start_times[0] - margin * 2.3, 
             0, 
             "降雨\n  率", 
             fontsize=10, 
@@ -211,7 +211,7 @@ def plot_gantt_chart(ax, start_times, end_times, data_values):
     ax.text(start_times[-1] + (end_times[-1] - start_times[-1]) + margin * 1.3, 
             0.3, 
             "( % )", 
-            fontsize=12, 
+            fontsize=10, 
             color='white', 
             fontweight='bold'
             )
@@ -256,7 +256,7 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
 
         # 標註最大值
         ax.text(max_idx,
-                value_list[max_idx] + 0.15,
+                value_list[max_idx] + 0.2,
                 f"{value_list[max_idx]:.0f}",
                 ha='center',
                 va='bottom',
@@ -266,7 +266,7 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
 
         # 標註最小值
         ax.text(min_idx,
-                value_list[min_idx] - 0.5,
+                value_list[min_idx] - 1,
                 f"{value_list[min_idx]:.0f}",
                 ha='center',
                 va='top',
@@ -319,10 +319,10 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
     ax.tick_params(axis='y', labelsize=10)
     ax.set_ylim(min_value - padding * 2, max_value + padding * 3.8)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.text(-2.8, 
+    ax.text(-2.1, 
             max_value + padding * 4.2, 
             "( °C )", 
-            fontsize=12, 
+            fontsize=10, 
             color='white', 
             fontweight='bold'
             )
@@ -341,7 +341,7 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
     ax2.text(len(data_times) - 0, 
              max_value + padding * 4.2, 
              "( % )", 
-             fontsize=12, 
+             fontsize=10, 
              color='white', 
              fontweight='bold'
              )
