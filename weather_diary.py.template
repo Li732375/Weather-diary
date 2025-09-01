@@ -432,8 +432,7 @@ if __name__ == "__main__":
     for District_Name, Table_links in results:
         Output_File_content.append(f"## {District_Name}：\n\n")
 
-        for link, title in zip(Table_links, table_title_names):
-            Output_File_content.append(f"### {title}\n\n")
+        for link in Table_links:
             Output_File_content.append(f"![該區今明預報圖]({'./' + link})\n\n")
         
         Output_File_content.append("\n")
