@@ -427,8 +427,6 @@ if __name__ == "__main__":
         f"# {Date_Now} ({Date_Weekday_zh}) {city_name} 天氣預報\n",
     ]
 
-    table_title_names = ["溫度 / 相對溼度 / 降雨機率 (3 小時)"]  # 圖表標題
-
     for District_Name, Table_links in results:
         Output_File_content.append(f"## {District_Name}：\n\n")
 
