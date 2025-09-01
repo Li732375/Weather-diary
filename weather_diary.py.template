@@ -146,20 +146,6 @@ def get_trend_values(location_data, Date_Now):
 
 # 繪製甘特圖(有背景色)
 def plot_gantt_chart_with_highlights(ax, start_times, end_times, data_values):
-    # 設定跨日背景
-    prev_day = start_times[0].day
-    start_idx = start_times[0]
-    color_toggle = True  # 控制顏色交錯
-
-    for i, dt in enumerate(start_times):
-        if dt.day != prev_day or i == len(start_times) - 1:
-            end_idx = dt if dt.day != prev_day else end_times[-1]
-            color = DAY_BG_COLOR_LIGHT if color_toggle else DAY_BG_COLOR_DARK
-            ax.axvspan(start_idx, end_idx, color=color, alpha=TABLE_ALPHA)
-            prev_day = dt.day
-            start_idx = dt
-            color_toggle = not color_toggle
-
     # 將百分比轉換為 Y 值
     y_values = [int(v) / 100 for v in data_values]
 
