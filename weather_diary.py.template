@@ -192,7 +192,7 @@ def plot_gantt_chart_with_highlights(ax, start_times, end_times, data_values):
     ax.text(start_times[0] - margin * 2.7, 
             0, 
             "降雨\n  率", 
-            fontsize=12, 
+            fontsize=11, 
             color='white', 
             fontweight='bold'
             )
@@ -392,7 +392,7 @@ def plot_gantt_chart(ax, start_times, end_times, data_values):
     ax.text(start_times[0] - margin * 2.7, 
             0.4, 
             "天氣\n現象", 
-            fontsize=12, 
+            fontsize=11, 
             color='white', 
             fontweight='bold'
             )
