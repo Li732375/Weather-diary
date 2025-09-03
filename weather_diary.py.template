@@ -39,7 +39,13 @@ def get_weather_data():
 
     # 取得資料轉換為 JSON 格式
     response = requests.get(URL)
-    data = response.json()
+    
+    if response.status_code != 200:
+        raise Exception(f"API 請求失敗，狀態碼：{response.status_code}")
+    try:
+        data = response.json()
+    except json.JSONDecodeError:
+        raise Exception("回傳 JSON 格式錯誤")
     
     # 儲存 JSON 結果
     data_id = data["records"]["Locations"][0]["Dataid"]
