@@ -236,12 +236,25 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
 
     # 設定兩種溫度折現線條
     for element, value_list in Temp_and_ATemp_items:
+        marker="."
+        color=None
+        linestyle=":"
+        linewidth=1
+
+        if element == "溫度":
+            marker="o"
+            color="red"
+            linestyle="-"
+            linewidth=3
+
         ax.plot(range(len(data_times)), 
                 value_list,
-                marker="o", 
-                linestyle="-", 
-                linewidth=2,
-                label=element
+                marker=marker,
+                linestyle=linestyle,
+                linewidth=linewidth,
+                label=element,
+                color=color,
+                zorder=2  # 設定層級，讓折現圖在上層
                 )
         
         # 找到最大值與最小值的數字標籤
@@ -273,30 +286,13 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
     
     # 設定相對溼度因子折現線條
     for element, value_list in R_Hum_item:
-        ax2.plot(range(len(data_times)), 
+        ax2.bar(range(len(data_times)), 
                 value_list,
-                marker="o", 
-                linestyle="-", 
-                color="#008585", 
-                linewidth=2,
-                label=element
+                color="#0089E44B",
+                label=element,
+                zorder=1  # 設定較低層級，讓柱狀圖在下層
                 )
         
-    # 設定點上標記字型
-    for x, y in zip(range(len(data_times)), value_list):
-        ax2.text(x, 
-                y + 0.5, 
-                f"{y:.0f}", 
-                ha='center', 
-                va='bottom', 
-                fontsize=10, 
-                color='#9C9C9C',
-                fontweight='bold'
-                )
-
-    # 顯示網格
-    ax.grid(True, linestyle='--', alpha=0.3)
-    
     # 設定 X 軸
     xtick_locs = set(range(0, len(data_times), 3))  # 每 3 筆顯示刻度
     xtick_locs.update([0, len(data_times) - 1])  # 確保顯示第一筆和最後一筆
@@ -326,19 +322,32 @@ def plot_lines_chart(ax, data_times, **data_values_dict):
     max_value = max(max(v) for v in R_Hum_values)
     min_value = min(min(v) for v in R_Hum_values)
     padding = max(1, int((max_value - min_value) * 0.2))
-    ax2.tick_params(axis='y', labelsize=20)
-    yticks = ax2.get_yticks()
-    ax2.set_yticks(yticks)  # 先設定 ticks
-    ax2.set_yticklabels(["" for _ in yticks], fontsize=0)  # 才能設定 label
+
     ax2.set_ylim(min_value - padding * 2, max_value + padding * 3.8)
+    ax2.tick_params(axis='y', labelsize=12)
+
+    # 使用整數刻度（可選，想保留自動刻度也可移除這行）
     ax2.yaxis.set_major_locator(MaxNLocator(integer=True))
-    ax2.text(len(data_times) - 0, 
-             max_value + padding * 4.2, 
-             "( % )", 
-             fontsize=12, 
-             color='white', 
-             fontweight='bold'
-             )
+
+    # 定義 Formatter，隱藏最高兩個刻度
+    def format_ytick(value, pos):
+        yticks = ax2.get_yticks()
+        top_2 = sorted(set(yticks))[-2:]  # 最高兩個刻度（去除重複保險）
+        return "" if (value in top_2) or (int(value) > 100) else str(int(value))
+
+    ax2.yaxis.set_major_formatter(FuncFormatter(format_ytick))
+
+    # Y 軸單位
+    ax2.text(len(data_times) - 0,
+            max_value + padding * 4.2,
+            "( % )",
+            fontsize=12,
+            color='white',
+            fontweight='bold'
+            )
+
+    # 顯示網格
+    ax.grid(True, linestyle='--', alpha=0.3)
     
     # 設定圖例
     lines1, labels1 = ax.get_legend_handles_labels()  # 取得左 Y 軸圖例
