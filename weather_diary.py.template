@@ -35,7 +35,7 @@ for filename in os.listdir(Save_Floder_Link):
 # 獲取天氣資料
 def get_weather_data():
     element_names = ",".join(ElementName_list)
-    URL = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-065?Authorization={API_KEY}&ElementName={element_names}&format=JSON&sort=time"
+    URL = f"https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization={API_KEY}&ElementName={element_names}&format=JSON&sort=time"
 
     # 取得資料轉換為 JSON 格式
     response = requests.get(URL)
